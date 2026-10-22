@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/case-save-request.schema.json",
+  "title": "Save case request v1",
+  "description": "Full replacement, including explicit nulls and omitted-content deletion. Runtime requires unique finding IDs and evidence IDs across all findings and <=12288 UTF-8 bytes for the full assigned CaseSnapshot at expectedCaseRevision+1. A lost response requires reloading the same case before any retry.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "profile",
+    "unresolvedFields",
+    "findings",
+    "expectedCaseRevision"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "profile": {
+      "$ref": "case-create-request.schema.json#/$defs/profile"
+    },
+    "unresolvedFields": {
+      "$ref": "case-create-request.schema.json#/$defs/stringList"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "case-create-request.schema.json#/$defs/finding"
+      }
+    },
+    "expectedCaseRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740990
+    }
+  }
+}

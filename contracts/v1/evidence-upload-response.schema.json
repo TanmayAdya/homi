@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/evidence-upload-response.schema.json",
+  "title": "Uploaded private evidence metadata v1",
+  "description": "Runtime binds descriptor.caseId to outer caseId and checks the expected case, finding, evidence ID and incremented catalog/asset revisions. The image descriptor contains no public URL or storage path.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "caseRevision",
+    "catalogRevision",
+    "evidence"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "caseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "catalogRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "evidence": {
+      "$ref": "evidence.schema.json#/$defs/descriptor"
+    }
+  }
+}
