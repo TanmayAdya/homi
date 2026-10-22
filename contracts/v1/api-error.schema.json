@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/api-error.schema.json",
+  "title": "API error v1",
+  "description": "Safe server error envelope. HTTP/code pairs: 400 INVALID_REQUEST; 401 UNAUTHENTICATED; 404 CASE_NOT_FOUND, PROGRAM_NOT_FOUND, ARTIFACT_NOT_FOUND, FORM_NOT_AVAILABLE (answer endpoint) or NOT_FOUND; 409 CASE_ID_UNAVAILABLE, CASE_REVISION_MISMATCH, PACKET_GENERATION_CONFLICT, FORM_CONTEXT_MISMATCH, FORM_ANSWERS_CONFLICT, FORM_ANSWERS_STALE, FORM_ANSWER_REVISION_MISMATCH, FORM_NOT_AVAILABLE (export endpoint), EVIDENCE_CONFLICT or EXPORT_GENERATION_CONFLICT; 410 EXPORT_EXPIRED; 422 INVALID_IMAGE or EXPORT_REVIEW_REQUIRED; 429 UPLOAD_BUSY or EXPORT_BUSY; 507 STORAGE_LIMIT_REACHED; 413 PAYLOAD_TOO_LARGE; 415 UNSUPPORTED_MEDIA_TYPE; 405 METHOD_NOT_ALLOWED; 500 INTERNAL_ERROR; 503 SERVICE_UNAVAILABLE. Clients display local safe messages, never raw server details.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "error"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "INVALID_REQUEST",
+            "UNAUTHENTICATED",
+            "CASE_NOT_FOUND",
+            "PROGRAM_NOT_FOUND",
+            "FORM_NOT_AVAILABLE",
+            "NOT_FOUND",
+            "CASE_REVISION_MISMATCH",
+            "PACKET_GENERATION_CONFLICT",
+            "FORM_CONTEXT_MISMATCH",
+            "FORM_ANSWERS_CONFLICT",
+            "FORM_ANSWERS_STALE",
+            "ARTIFACT_NOT_FOUND",
+            "EVIDENCE_CONFLICT",
+            "EXPORT_GENERATION_CONFLICT",
+            "FORM_ANSWER_REVISION_MISMATCH",
+            "EXPORT_EXPIRED",
+            "EXPORT_REVIEW_REQUIRED",
+            "EXPORT_BUSY",
+            "STORAGE_LIMIT_REACHED",
+            "PAYLOAD_TOO_LARGE",
+            "UNSUPPORTED_MEDIA_TYPE",
+            "METHOD_NOT_ALLOWED",
+            "INTERNAL_ERROR",
+            "SERVICE_UNAVAILABLE",
+            "CASE_ID_UNAVAILABLE",
+            "INVALID_IMAGE",
+            "UPLOAD_BUSY"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/draft-export.schema.json",
+  "title": "Private draft export metadata v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactId",
+    "caseId",
+    "caseRevision",
+    "programId",
+    "ruleVersion",
+    "formVersion",
+    "mappingVersion",
+    "formContextId",
+    "answerRevision",
+    "evidenceCatalogRevision",
+    "exportContextId",
+    "generatedAt",
+    "expiresAt",
+    "recheckAfter",
+    "status",
+    "isDemo",
+    "mediaType",
+    "byteLength",
+    "sha256",
+    "pageCount",
+    "renderingVersion",
+    "selectedEvidence",
+    "missingItems",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "artifactId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "caseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "programId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "ruleVersion": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "formVersion": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "mappingVersion": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "formContextId": {
+      "$ref": "form-answers.schema.json#/$defs/digest"
+    },
+    "answerRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "evidenceCatalogRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "exportContextId": {
+      "$ref": "form-answers.schema.json#/$defs/digest"
+    },
+    "generatedAt": {
+      "$ref": "form-answers.schema.json#/$defs/instant"
+    },
+    "expiresAt": {
+      "$ref": "form-answers.schema.json#/$defs/instant"
+    },
+    "recheckAfter": {
+      "anyOf": [
+        {
+          "$ref": "form-answers.schema.json#/$defs/instant"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "const": "draft"
+    },
+    "isDemo": {
+      "type": "boolean"
+    },
+    "mediaType": {
+      "const": "application/pdf"
+    },
+    "byteLength": {
+      "type": "integer",
+      "minimum": 8,
+      "maximum": 33554432
+    },
+    "sha256": {
+      "$ref": "form-answers.schema.json#/$defs/digest"
+    },
+    "pageCount": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "renderingVersion": {
+      "const": "draft-export-v1"
+    },
+    "selectedEvidence": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceRevision",
+          "findingId",
+          "sha256",
+          "reviewedAt",
+          "reviewedBy"
+        ],
+        "properties": {
+          "evidenceId": {
+            "$ref": "form-answers.schema.json#/$defs/id"
+          },
+          "evidenceRevision": {
+            "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+          },
+          "findingId": {
+            "$ref": "form-answers.schema.json#/$defs/id"
+          },
+          "sha256": {
+            "$ref": "form-answers.schema.json#/$defs/digest"
+          },
+          "reviewedAt": {
+            "$ref": "form-answers.schema.json#/$defs/instant"
+          },
+          "reviewedBy": {
+            "$ref": "form-answers.schema.json#/$defs/id"
+          }
+        }
+      }
+    },
+    "missingItems": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "description",
+          "resolvedBy"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "form-answers.schema.json#/$defs/id"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000,
+            "pattern": "\\S"
+          },
+          "resolvedBy": {
+            "enum": [
+              "resident",
+              "program",
+              "professional"
+            ]
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "const": "INCOMPLETE_DRAFT"
+        },
+        {
+          "const": "NOT_SUBMITTED"
+        },
+        {
+          "const": "POLICY_CURRENTNESS_UNKNOWN"
+        }
+      ],
+      "items": false
+    }
+  },
+  "description": "Private incomplete draft metadata; export is not submission or approval. Runtime requires unique evidence/missing-item IDs, reviewedAt===generatedAt, generatedAt<expiresAt<=generatedAt+15min and expiresAt<=recheckAfter when nonnull. Operational retention is separate from policy currentness. No storage path or URL.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "recheckAfter": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "warnings": {
+            "minItems": 3
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/draft-export-download-request.schema.json",
+  "title": "Download private draft export request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "artifactId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedCaseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "artifactId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    }
+  }
+}

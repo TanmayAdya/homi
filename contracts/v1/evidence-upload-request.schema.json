@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/evidence-upload-request.schema.json",
+  "title": "Upload private evidence request v1",
+  "description": "Canonical padded base64 only; runtime decoded image size 8..8388608 bytes. Runtime also verifies actual JPEG/PNG content, capture time, current owner/case/catalog/asset revisions and the saved finding/evidence association. New asset uses expectedEvidenceRevision 0. A deleted ID cannot be reused. Uploaded bytes are sanitized before private storage.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "expectedCatalogRevision",
+    "evidenceId",
+    "expectedEvidenceRevision",
+    "findingId",
+    "capturedAt",
+    "imageBase64"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedCaseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "expectedCatalogRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740990
+    },
+    "evidenceId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedEvidenceRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740990
+    },
+    "findingId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "capturedAt": {
+      "anyOf": [
+        {
+          "$ref": "form-answers.schema.json#/$defs/instant"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "imageBase64": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 11184812,
+      "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/][AQgw]==|[A-Za-z0-9+/]{2}[AEIMQUYcgkosw048]=)?$(?![\\s\\S])"
+    }
+  }
+}

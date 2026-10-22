@@ -1,0 +1,1103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/form-answers.schema.json",
+  "title": "Administrative form answers response v1",
+  "description": "Read/save response. Review is not consent, clinical verification or signing. Runtime requires saved case/program identity to equal response case/context identity, forbids future saved revisions and verifies isCurrent exactly against case/context versions. Unicode-aware regex and date/date-time format assertion are required; runtime validation remains authoritative for relational checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "caseRevision",
+    "context",
+    "saved",
+    "isCurrent"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "#/$defs/id"
+    },
+    "caseRevision": {
+      "$ref": "#/$defs/positiveRevision"
+    },
+    "context": {
+      "$ref": "#/$defs/context"
+    },
+    "saved": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/savedSet"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "isCurrent": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "saved": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "isCurrent": {
+            "const": false
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+    },
+    "digest": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[a-f0-9]{64}$(?![\\s\\S])"
+    },
+    "positiveRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "instant": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?!0000)[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$(?![\\s\\S])"
+    },
+    "valueRules": {
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "memberBirthDate",
+                  "referralDate"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 10
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "memberPhone",
+                  "representativePhone",
+                  "referringOrganizationPhone",
+                  "referrerPhone"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 40
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "memberId",
+                  "memberPreferredSpokenLanguage"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 80
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "referrerTitle"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 100
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "memberFirstName",
+                  "memberLastName",
+                  "representativeName",
+                  "referrerName"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 160
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "referralSource",
+                  "referringOrganizationName",
+                  "referrerOrganizationName"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 200
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "representativeEmail",
+                  "referrerEmail"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maxLength": 254
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "memberBirthDate",
+                  "referralDate"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "format": "date",
+                "pattern": "^(?!0000)[0-9]{4}-[0-9]{2}-[0-9]{2}$(?![\\s\\S])"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "enum": [
+                  "representativeEmail",
+                  "referrerEmail"
+                ]
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$(?![\\s\\S])"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "value"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reviewState": {
+                "const": "needs_review"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "inputAnswer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "value",
+        "reviewState"
+      ],
+      "properties": {
+        "key": {
+          "enum": [
+            "memberFirstName",
+            "memberLastName",
+            "memberBirthDate",
+            "memberId",
+            "memberPhone",
+            "memberPreferredSpokenLanguage",
+            "representativeName",
+            "representativeEmail",
+            "representativePhone",
+            "referralDate",
+            "referralSource",
+            "referringOrganizationName",
+            "referringOrganizationPhone",
+            "referrerName",
+            "referrerTitle",
+            "referrerOrganizationName",
+            "referrerEmail",
+            "referrerPhone"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 254,
+          "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+        },
+        "reviewState": {
+          "enum": [
+            "needs_review",
+            "reviewed"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/valueRules"
+        }
+      ]
+    },
+    "savedAnswer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "value",
+        "reviewState",
+        "reviewedAt",
+        "reviewedBy"
+      ],
+      "properties": {
+        "key": {
+          "enum": [
+            "memberFirstName",
+            "memberLastName",
+            "memberBirthDate",
+            "memberId",
+            "memberPhone",
+            "memberPreferredSpokenLanguage",
+            "representativeName",
+            "representativeEmail",
+            "representativePhone",
+            "referralDate",
+            "referralSource",
+            "referringOrganizationName",
+            "referringOrganizationPhone",
+            "referrerName",
+            "referrerTitle",
+            "referrerOrganizationName",
+            "referrerEmail",
+            "referrerPhone"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 254,
+          "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+        },
+        "reviewState": {
+          "enum": [
+            "needs_review",
+            "reviewed"
+          ]
+        },
+        "reviewedAt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/instant"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewedBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/valueRules"
+        },
+        {
+          "if": {
+            "properties": {
+              "reviewState": {
+                "const": "reviewed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reviewedAt": {
+                "$ref": "#/$defs/instant"
+              },
+              "reviewedBy": {
+                "$ref": "#/$defs/id"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "reviewedAt": {
+                "type": "null"
+              },
+              "reviewedBy": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "inputAnswers": {
+      "type": "array",
+      "maxItems": 18,
+      "items": {
+        "$ref": "#/$defs/inputAnswer"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberFirstName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberLastName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberBirthDate"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberId"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberPhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberPreferredSpokenLanguage"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "representativeName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "representativeEmail"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "representativePhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referralDate"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referralSource"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referringOrganizationName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referringOrganizationPhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerTitle"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerOrganizationName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerEmail"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerPhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        }
+      ]
+    },
+    "savedAnswers": {
+      "type": "array",
+      "maxItems": 18,
+      "items": {
+        "$ref": "#/$defs/savedAnswer"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberFirstName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberLastName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberBirthDate"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberId"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberPhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "memberPreferredSpokenLanguage"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "representativeName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "representativeEmail"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "representativePhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referralDate"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referralSource"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referringOrganizationName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referringOrganizationPhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerTitle"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerOrganizationName"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerEmail"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "const": "referrerPhone"
+              }
+            },
+            "required": [
+              "key"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        }
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "programId",
+        "formVersion",
+        "mappingVersion",
+        "formContextId"
+      ],
+      "properties": {
+        "programId": {
+          "$ref": "#/$defs/id"
+        },
+        "formVersion": {
+          "$ref": "#/$defs/id"
+        },
+        "mappingVersion": {
+          "$ref": "#/$defs/id"
+        },
+        "formContextId": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "savedSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "caseRevision",
+        "programId",
+        "formVersion",
+        "mappingVersion",
+        "formContextId",
+        "answerRevision",
+        "updatedAt",
+        "updatedBy",
+        "answers"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "1"
+        },
+        "caseId": {
+          "$ref": "#/$defs/id"
+        },
+        "caseRevision": {
+          "$ref": "#/$defs/positiveRevision"
+        },
+        "programId": {
+          "$ref": "#/$defs/id"
+        },
+        "formVersion": {
+          "$ref": "#/$defs/id"
+        },
+        "mappingVersion": {
+          "$ref": "#/$defs/id"
+        },
+        "formContextId": {
+          "$ref": "#/$defs/digest"
+        },
+        "answerRevision": {
+          "$ref": "#/$defs/positiveRevision"
+        },
+        "updatedAt": {
+          "$ref": "#/$defs/instant"
+        },
+        "updatedBy": {
+          "$ref": "#/$defs/id"
+        },
+        "answers": {
+          "$ref": "#/$defs/savedAnswers"
+        }
+      },
+      "description": "Runtime also checks reviewedAt <= updatedAt, date answers <= UTC updatedAt date and memberBirthDate <= referralDate. Review actor/time originate on the server, not from save requests."
+    }
+  }
+}
