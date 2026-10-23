@@ -1,0 +1,14 @@
+**
+!Dockerfile
+!.dockerignore
+!package.json
+!package-lock.json
+!src/
+!src/**
+!migrations/
+!migrations/*.sql
+!certs/
+!certs/supabase-root-2021.crt
+!assets/
+!assets/forms/
+!assets/forms/scfhp-41567.pdf
