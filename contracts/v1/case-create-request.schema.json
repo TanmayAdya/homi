@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/case-create-request.schema.json",
+  "title": "Create case request v1",
+  "description": "Full replacement content. Choose a lowercase UUIDv4 once and retain it for recovery. Runtime requires unique finding IDs and evidence IDs across all findings and <=12288 UTF-8 bytes for the full assigned CaseSnapshot at revision 1; no owner or revision is supplied by the caller.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "profile",
+    "unresolvedFields",
+    "findings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$(?![\\s\\S])"
+    },
+    "profile": {
+      "$ref": "case-create-request.schema.json#/$defs/profile"
+    },
+    "unresolvedFields": {
+      "$ref": "case-create-request.schema.json#/$defs/stringList"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "case-create-request.schema.json#/$defs/finding"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "pattern": "^(?=[\\s\\S]*\\S)(?:[^\\uD800-\\uDFFF]|[\\uD800-\\uDBFF][\\uDC00-\\uDFFF])+$(?![\\s\\S])"
+    },
+    "profile": {
+      "allOf": [
+        {
+          "$ref": "case.schema.json#/$defs/profile"
+        },
+        {
+          "properties": {
+            "city": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/text"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "county": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/text"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "healthPlan": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/text"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ageYears": {
+              "maximum": 9007199254740991
+            },
+            "householdSize": {
+              "maximum": 9007199254740991
+            }
+          }
+        }
+      ]
+    },
+    "stringList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "form-answers.schema.json#/$defs/id"
+      }
+    },
+    "finding": {
+      "allOf": [
+        {
+          "$ref": "case.schema.json#/$defs/finding"
+        },
+        {
+          "properties": {
+            "id": {
+              "$ref": "form-answers.schema.json#/$defs/id"
+            },
+            "observation": {
+              "$ref": "#/$defs/text"
+            },
+            "evidenceIds": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "form-answers.schema.json#/$defs/id"
+              }
+            },
+            "measurements": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "case.schema.json#/$defs/measurement"
+                  },
+                  {
+                    "properties": {
+                      "type": {
+                        "$ref": "form-answers.schema.json#/$defs/id"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

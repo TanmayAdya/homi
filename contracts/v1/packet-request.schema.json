@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/packet-request.schema.json",
+  "title": "Draft preparation request v1",
+  "description": "POST /v1/prepare-packet with a bearer session. The server loads the owned case, selects current program rules and prepares a draft checklist. Reuse a generation key only to retry the same preparation; changed inputs require a new key.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "expectedCaseRevision", "programId", "generationKey"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "caseId": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+    "expectedCaseRevision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "programId": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+    "generationKey": {"type": "string", "minLength": 8, "maxLength": 128, "pattern": "^[A-Za-z0-9_-]+$(?![\\s\\S])"}
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/draft-export-request.schema.json",
+  "title": "Create private draft export request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "programId",
+    "expectedFormContextId",
+    "expectedAnswerRevision",
+    "expectedEvidenceCatalogRevision",
+    "generationKey",
+    "selectedEvidence"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedCaseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "programId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedFormContextId": {
+      "$ref": "form-answers.schema.json#/$defs/digest"
+    },
+    "expectedAnswerRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "expectedEvidenceCatalogRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "generationKey": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_-]{8,128}$(?![\\s\\S])"
+    },
+    "selectedEvidence": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "$ref": "evidence.schema.json#/$defs/selection"
+      }
+    }
+  },
+  "description": "Explicit ordered selection only. Runtime rejects duplicate evidence IDs, stale revisions, unconfirmed finding associations and changed form/answer/catalog context. A generation key is scoped to authenticated owner and case."
+}

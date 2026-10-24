@@ -1,0 +1,778 @@
+[
+  {
+    "programId": "scfhp-eaa",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "fictional-scfhp-eaa",
+      "revision": 1,
+      "profile": {
+        "city": null,
+        "county": null,
+        "healthPlan": null,
+        "tenure": null,
+        "ageYears": null,
+        "householdSize": null,
+        "annualIncomeUsd": null,
+        "ownerConsentReported": null
+      },
+      "unresolvedFields": [],
+      "findings": []
+    },
+    "intakeRequest": {
+      "schemaVersion": "2",
+      "caseId": "fictional-scfhp-eaa",
+      "expectedCaseRevision": 1,
+      "programId": "scfhp-eaa",
+      "expectedIntakeRevision": 0,
+      "expectedQuestionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+      "answers": [
+        {
+          "key": "activeMembershipReported",
+          "value": false,
+          "reviewState": "reported"
+        },
+        {
+          "key": "willingServicesReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "professionalEvaluationReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "professionalOrderReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "otherFundingReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "estimatedCostUsd",
+          "value": 0,
+          "reviewState": "reported"
+        },
+        {
+          "key": "priorEaaPaidUsd",
+          "value": 0,
+          "reviewState": "reported"
+        }
+      ]
+    },
+    "intake": {
+      "schemaVersion": "2",
+      "caseId": "fictional-scfhp-eaa",
+      "caseRevision": 2,
+      "definition": {
+        "programId": "scfhp-eaa",
+        "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+        "questions": [
+          {
+            "key": "activeMembershipReported",
+            "label": "Do you believe your membership is currently active?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "The health plan must verify enrollment and applicable coverage."
+          },
+          {
+            "key": "willingServicesReported",
+            "label": "Are you interested in receiving home adaptation services?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Interest is not a signed consent or authorization."
+          },
+          {
+            "key": "professionalEvaluationReported",
+            "label": "Do you have a professional home or therapy evaluation?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Record whether a document is available. The app does not evaluate medical necessity."
+          },
+          {
+            "key": "professionalOrderReported",
+            "label": "Do you have a professional order for the requested work?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "The responsible professional and health plan determine whether the order is sufficient."
+          },
+          {
+            "key": "otherFundingReported",
+            "label": "Is another source paying for the same requested work?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "The plan reviews overlapping services and other coverage."
+          },
+          {
+            "key": "estimatedCostUsd",
+            "label": "Estimated project cost, if known",
+            "kind": "money",
+            "maxLength": null,
+            "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+          },
+          {
+            "key": "priorEaaPaidUsd",
+            "label": "Prior EAA payments, if known",
+            "kind": "money",
+            "maxLength": null,
+            "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+          }
+        ]
+      },
+      "saved": {
+        "schemaVersion": "2",
+        "caseId": "fictional-scfhp-eaa",
+        "caseRevision": 2,
+        "programId": "scfhp-eaa",
+        "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+        "intakeRevision": 1,
+        "updatedAt": "2026-10-22T20:00:00.000Z",
+        "updatedBy": "fictional-owner",
+        "answers": [
+          {
+            "key": "activeMembershipReported",
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "key": "willingServicesReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "professionalEvaluationReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "professionalOrderReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "otherFundingReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "estimatedCostUsd",
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "key": "priorEaaPaidUsd",
+            "value": 0,
+            "reviewState": "reported"
+          }
+        ]
+      },
+      "isCurrent": true
+    },
+    "form": {
+      "schemaVersion": "2",
+      "caseId": "fictional-scfhp-eaa",
+      "caseRevision": 2,
+      "context": {
+        "programId": "scfhp-eaa",
+        "formVersion": "sha256:ebd403673949e7fa01005789700fa6baddd77d351de90a44f7fee1eb81516cd7",
+        "mappingVersion": "scfhp-41567-eaa-reviewed-identity-v2",
+        "formContextId": "0f770fe30ebe83700774867d3ed073a0cfe4110dd36b86c6f97cb4b38f6af3b8"
+      },
+      "saved": null,
+      "isCurrent": false,
+      "fieldDefinitions": [
+        {
+          "key": "memberFirstName",
+          "label": "Given name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "memberLastName",
+          "label": "Family name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "memberBirthDate",
+          "label": "Date of birth (YYYY-MM-DD)",
+          "kind": "date",
+          "maxLength": 10
+        },
+        {
+          "key": "memberId",
+          "label": "Plan member identifier",
+          "kind": "text",
+          "maxLength": 80
+        },
+        {
+          "key": "memberPhone",
+          "label": "Contact phone",
+          "kind": "text",
+          "maxLength": 40
+        },
+        {
+          "key": "memberPreferredSpokenLanguage",
+          "label": "Preferred spoken language",
+          "kind": "text",
+          "maxLength": 80
+        },
+        {
+          "key": "representativeName",
+          "label": "Authorized representative name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "representativeEmail",
+          "label": "Authorized representative email",
+          "kind": "email",
+          "maxLength": 254
+        },
+        {
+          "key": "representativePhone",
+          "label": "Authorized representative phone",
+          "kind": "text",
+          "maxLength": 40
+        },
+        {
+          "key": "referralDate",
+          "label": "Referral date (YYYY-MM-DD)",
+          "kind": "date",
+          "maxLength": 10
+        },
+        {
+          "key": "referralSource",
+          "label": "Referral source",
+          "kind": "text",
+          "maxLength": 200
+        },
+        {
+          "key": "referringOrganizationName",
+          "label": "Referring organization",
+          "kind": "text",
+          "maxLength": 200
+        },
+        {
+          "key": "referringOrganizationPhone",
+          "label": "Referring organization phone",
+          "kind": "text",
+          "maxLength": 40
+        },
+        {
+          "key": "referrerName",
+          "label": "Referring individual name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "referrerTitle",
+          "label": "Referring individual title",
+          "kind": "text",
+          "maxLength": 100
+        },
+        {
+          "key": "referrerOrganizationName",
+          "label": "Referring individual organization",
+          "kind": "text",
+          "maxLength": 200
+        },
+        {
+          "key": "referrerEmail",
+          "label": "Referring individual email",
+          "kind": "email",
+          "maxLength": 254
+        },
+        {
+          "key": "referrerPhone",
+          "label": "Referring individual phone",
+          "kind": "text",
+          "maxLength": 40
+        }
+      ],
+      "artifactKind": "official_form_draft"
+    }
+  },
+  {
+    "programId": "hpsm-eaa",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "fictional-hpsm-eaa",
+      "revision": 1,
+      "profile": {
+        "city": null,
+        "county": null,
+        "healthPlan": null,
+        "tenure": null,
+        "ageYears": null,
+        "householdSize": null,
+        "annualIncomeUsd": null,
+        "ownerConsentReported": null
+      },
+      "unresolvedFields": [],
+      "findings": []
+    },
+    "intakeRequest": {
+      "schemaVersion": "2",
+      "caseId": "fictional-hpsm-eaa",
+      "expectedCaseRevision": 1,
+      "programId": "hpsm-eaa",
+      "expectedIntakeRevision": 0,
+      "expectedQuestionnaireVersion": "4059c929ea12ef5ae544ccbf65df00360c8ee15ffb72ff5d66cbf977f4417e37",
+      "answers": [
+        {
+          "key": "activeMembershipReported",
+          "value": false,
+          "reviewState": "reported"
+        },
+        {
+          "key": "willingServicesReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "professionalEvaluationReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "professionalOrderReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "otherFundingReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "estimatedCostUsd",
+          "value": 0,
+          "reviewState": "reported"
+        },
+        {
+          "key": "priorEaaPaidUsd",
+          "value": 0,
+          "reviewState": "reported"
+        },
+        {
+          "key": "careManagerEngagedReported",
+          "value": null,
+          "reviewState": "unknown"
+        }
+      ]
+    },
+    "intake": {
+      "schemaVersion": "2",
+      "caseId": "fictional-hpsm-eaa",
+      "caseRevision": 2,
+      "definition": {
+        "programId": "hpsm-eaa",
+        "questionnaireVersion": "4059c929ea12ef5ae544ccbf65df00360c8ee15ffb72ff5d66cbf977f4417e37",
+        "questions": [
+          {
+            "key": "activeMembershipReported",
+            "label": "Do you believe your membership is currently active?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "The health plan must verify enrollment and applicable coverage."
+          },
+          {
+            "key": "willingServicesReported",
+            "label": "Are you interested in receiving home adaptation services?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Interest is not a signed consent or authorization."
+          },
+          {
+            "key": "professionalEvaluationReported",
+            "label": "Do you have a professional home or therapy evaluation?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Record whether a document is available. The app does not evaluate medical necessity."
+          },
+          {
+            "key": "professionalOrderReported",
+            "label": "Do you have a professional order for the requested work?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "The responsible professional and health plan determine whether the order is sufficient."
+          },
+          {
+            "key": "otherFundingReported",
+            "label": "Is another source paying for the same requested work?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "The plan reviews overlapping services and other coverage."
+          },
+          {
+            "key": "estimatedCostUsd",
+            "label": "Estimated project cost, if known",
+            "kind": "money",
+            "maxLength": null,
+            "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+          },
+          {
+            "key": "priorEaaPaidUsd",
+            "label": "Prior EAA payments, if known",
+            "kind": "money",
+            "maxLength": null,
+            "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+          },
+          {
+            "key": "careManagerEngagedReported",
+            "label": "Are you working with a care manager?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "HPSM must confirm its current care-management and referral requirements."
+          }
+        ]
+      },
+      "saved": {
+        "schemaVersion": "2",
+        "caseId": "fictional-hpsm-eaa",
+        "caseRevision": 2,
+        "programId": "hpsm-eaa",
+        "questionnaireVersion": "4059c929ea12ef5ae544ccbf65df00360c8ee15ffb72ff5d66cbf977f4417e37",
+        "intakeRevision": 1,
+        "updatedAt": "2026-10-22T20:00:00.000Z",
+        "updatedBy": "fictional-owner",
+        "answers": [
+          {
+            "key": "activeMembershipReported",
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "key": "willingServicesReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "professionalEvaluationReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "professionalOrderReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "otherFundingReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "estimatedCostUsd",
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "key": "priorEaaPaidUsd",
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "key": "careManagerEngagedReported",
+            "value": null,
+            "reviewState": "unknown"
+          }
+        ]
+      },
+      "isCurrent": true
+    },
+    "form": {
+      "schemaVersion": "2",
+      "caseId": "fictional-hpsm-eaa",
+      "caseRevision": 2,
+      "context": {
+        "programId": "hpsm-eaa",
+        "formVersion": "sha256:506b6606e3734a2c352a48a67eed28e250e9c369be10e38b52c699e86abbb0d0",
+        "mappingVersion": "hpsm-six-page-administrative-2026-10-22-v1",
+        "formContextId": "ccb9c66b7f6a376210202e53e834d840aca29951687249e1fbda4ffd07d2e126"
+      },
+      "saved": null,
+      "isCurrent": false,
+      "fieldDefinitions": [
+        {
+          "key": "memberFirstName",
+          "label": "Given name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "memberLastName",
+          "label": "Family name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "memberBirthDate",
+          "label": "Date of birth (YYYY-MM-DD)",
+          "kind": "date",
+          "maxLength": 10
+        },
+        {
+          "key": "memberId",
+          "label": "Plan member identifier",
+          "kind": "text",
+          "maxLength": 80
+        },
+        {
+          "key": "memberPhone",
+          "label": "Contact phone",
+          "kind": "text",
+          "maxLength": 40
+        },
+        {
+          "key": "memberPreferredSpokenLanguage",
+          "label": "Preferred spoken language",
+          "kind": "text",
+          "maxLength": 80
+        },
+        {
+          "key": "referralDate",
+          "label": "Referral date (YYYY-MM-DD)",
+          "kind": "date",
+          "maxLength": 10
+        },
+        {
+          "key": "referringOrganizationName",
+          "label": "Referring organization",
+          "kind": "text",
+          "maxLength": 200
+        },
+        {
+          "key": "referrerEmail",
+          "label": "Referring individual email",
+          "kind": "email",
+          "maxLength": 254
+        },
+        {
+          "key": "referrerPhone",
+          "label": "Referring individual phone",
+          "kind": "text",
+          "maxLength": 40
+        }
+      ],
+      "artifactKind": "official_form_draft"
+    }
+  },
+  {
+    "programId": "rtp-home-repair",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "fictional-rtp-home-repair",
+      "revision": 1,
+      "profile": {
+        "city": null,
+        "county": null,
+        "healthPlan": null,
+        "tenure": null,
+        "ageYears": null,
+        "householdSize": null,
+        "annualIncomeUsd": null,
+        "ownerConsentReported": null
+      },
+      "unresolvedFields": [],
+      "findings": []
+    },
+    "intakeRequest": {
+      "schemaVersion": "2",
+      "caseId": "fictional-rtp-home-repair",
+      "expectedCaseRevision": 1,
+      "programId": "rtp-home-repair",
+      "expectedIntakeRevision": 0,
+      "expectedQuestionnaireVersion": "b65e4a71378a4eff16968fe695a90dbb4eb2e5f4396e35c4889a253f25f62f72",
+      "answers": [
+        {
+          "key": "ownerOccupiedReported",
+          "value": false,
+          "reviewState": "reported"
+        },
+        {
+          "key": "otherPropertyReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "intendRemainTwoYearsReported",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "incomeDocumentsReady",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "ownershipDocumentsReady",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "residenceDocumentsReady",
+          "value": null,
+          "reviewState": "unknown"
+        },
+        {
+          "key": "repairRequest",
+          "value": null,
+          "reviewState": "unknown"
+        }
+      ]
+    },
+    "intake": {
+      "schemaVersion": "2",
+      "caseId": "fictional-rtp-home-repair",
+      "caseRevision": 2,
+      "definition": {
+        "programId": "rtp-home-repair",
+        "questionnaireVersion": "b65e4a71378a4eff16968fe695a90dbb4eb2e5f4396e35c4889a253f25f62f72",
+        "questions": [
+          {
+            "key": "ownerOccupiedReported",
+            "label": "Do you own and live in the home?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "RTP must verify ownership, residence and its current service area."
+          },
+          {
+            "key": "otherPropertyReported",
+            "label": "Do you own other real estate?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "RTP must confirm whether and how this affects the currently accepted application."
+          },
+          {
+            "key": "intendRemainTwoYearsReported",
+            "label": "Do you intend to remain in this home for at least two years?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "This prepares a discussion with RTP; the app has not verified the current annual eligibility rules."
+          },
+          {
+            "key": "incomeDocumentsReady",
+            "label": "Are household income documents ready?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Follow RTP instructions for adults in the household. Do not upload bank statements or tax records to this app."
+          },
+          {
+            "key": "ownershipDocumentsReady",
+            "label": "Is proof of ownership ready?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Submit supporting documents through RTP’s official intake process."
+          },
+          {
+            "key": "residenceDocumentsReady",
+            "label": "Is proof of residence ready?",
+            "kind": "boolean",
+            "maxLength": null,
+            "description": "Follow official instructions and obscure unnecessary account or Social Security numbers."
+          },
+          {
+            "key": "repairRequest",
+            "label": "What repairs would you like RTP to consider?",
+            "kind": "text",
+            "maxLength": 600,
+            "description": "Describe observed issues and requested help. Avoid account numbers, diagnoses or unsupported structural claims."
+          }
+        ]
+      },
+      "saved": {
+        "schemaVersion": "2",
+        "caseId": "fictional-rtp-home-repair",
+        "caseRevision": 2,
+        "programId": "rtp-home-repair",
+        "questionnaireVersion": "b65e4a71378a4eff16968fe695a90dbb4eb2e5f4396e35c4889a253f25f62f72",
+        "intakeRevision": 1,
+        "updatedAt": "2026-10-22T20:00:00.000Z",
+        "updatedBy": "fictional-owner",
+        "answers": [
+          {
+            "key": "ownerOccupiedReported",
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "key": "otherPropertyReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "intendRemainTwoYearsReported",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "incomeDocumentsReady",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "ownershipDocumentsReady",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "residenceDocumentsReady",
+            "value": null,
+            "reviewState": "unknown"
+          },
+          {
+            "key": "repairRequest",
+            "value": null,
+            "reviewState": "unknown"
+          }
+        ]
+      },
+      "isCurrent": true
+    },
+    "form": {
+      "schemaVersion": "2",
+      "caseId": "fictional-rtp-home-repair",
+      "caseRevision": 2,
+      "context": {
+        "programId": "rtp-home-repair",
+        "formVersion": "sha256:ed9ea6e6fbfc670135bf1dbb4ee94538022664bdb2500f5cbc49a16bdf6a6687",
+        "mappingVersion": "rtp-preparation-worksheet-2026-10-22-v1",
+        "formContextId": "2df1578aadef1e6d40e323f82edba602c6c8bdd87b4af5cd09d4dc69968f48d9"
+      },
+      "saved": null,
+      "isCurrent": false,
+      "fieldDefinitions": [
+        {
+          "key": "memberFirstName",
+          "label": "Given name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "memberLastName",
+          "label": "Family name",
+          "kind": "text",
+          "maxLength": 160
+        },
+        {
+          "key": "memberPhone",
+          "label": "Contact phone",
+          "kind": "text",
+          "maxLength": 40
+        },
+        {
+          "key": "memberPreferredSpokenLanguage",
+          "label": "Preferred spoken language",
+          "kind": "text",
+          "maxLength": 80
+        }
+      ],
+      "artifactKind": "preparation_worksheet"
+    }
+  }
+]

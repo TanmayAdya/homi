@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v2/annotations-save-request.schema.json",
+  "title": "Annotations Save Request",
+  "description": "Normalized top-left [x,y,width,height] coordinates in integer millionths. Runtime requires x+width and y+height <=1000000, unique mark IDs, <=800 total label characters, <=12 KiB marks, exact canonical image hash/dimensions. Every save increments annotation and catalog revisions. Server assigns reviewer identity/time.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "expectedCatalogRevision",
+    "evidenceId",
+    "expectedEvidenceRevision",
+    "expectedAnnotationRevision",
+    "expectedImageSha256",
+    "expectedImageWidth",
+    "expectedImageHeight",
+    "marks",
+    "reviewedForExport"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2"
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "expectedCaseRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "expectedCatalogRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "evidenceId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "expectedEvidenceRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "expectedAnnotationRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "expectedImageSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "expectedImageWidth": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8192
+    },
+    "expectedImageHeight": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8192
+    },
+    "marks": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "rect",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "rect": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000000
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000000
+              },
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000000
+              },
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000000
+              }
+            ],
+            "items": false,
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 80
+          }
+        }
+      }
+    },
+    "reviewedForExport": {
+      "type": "boolean"
+    }
+  }
+}
