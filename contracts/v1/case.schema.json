@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/case.schema.json",
+  "title": "Case snapshot v1",
+  "description": "A saved case. Null means unknown, never false or zero. Only fictional cases belong in source control.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "revision", "profile", "unresolvedFields", "findings"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "caseId": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "profile": {"$ref": "#/$defs/profile"},
+    "unresolvedFields": {"$ref": "#/$defs/stringList"},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}}
+  },
+  "$defs": {
+    "nullableText": {"type": ["string", "null"], "minLength": 1},
+    "stringList": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["city", "county", "healthPlan", "tenure", "ageYears", "householdSize", "annualIncomeUsd", "ownerConsentReported"],
+      "properties": {
+        "city": {"$ref": "#/$defs/nullableText"},
+        "county": {"$ref": "#/$defs/nullableText"},
+        "healthPlan": {"$ref": "#/$defs/nullableText"},
+        "tenure": {"enum": ["owner", "renter", null]},
+        "ageYears": {"type": ["integer", "null"], "minimum": 0},
+        "householdSize": {"type": ["integer", "null"], "minimum": 1},
+        "annualIncomeUsd": {"type": ["number", "null"]},
+        "ownerConsentReported": {"type": ["boolean", "null"]}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "room", "observation", "reviewState", "evidenceIds", "measurements"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "room": {"enum": ["bathroom", "entrance", "other"]},
+        "observation": {"type": "string", "minLength": 1},
+        "reviewState": {"enum": ["confirmed", "needs_review", "dismissed"]},
+        "evidenceIds": {"$ref": "#/$defs/stringList"},
+        "measurements": {"type": "array", "items": {"$ref": "#/$defs/measurement"}}
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value", "unit", "method", "confirmed"],
+      "properties": {
+        "type": {"type": "string", "minLength": 1},
+        "value": {"type": "number", "minimum": 0},
+        "unit": {"const": "mm"},
+        "method": {"enum": ["manual", "estimated"]},
+        "confirmed": {"type": "boolean"}
+      }
+    }
+  }
+}

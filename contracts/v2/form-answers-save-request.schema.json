@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v2/form-answers-save-request.schema.json",
+  "title": "Administrative form answers replacement request v2",
+  "description": "Atomically replace all administrative answers and advance the case revision. Omitted keys clear previous answers. Client review flags never supply server actor/time. Runtime validates date ordering; server clock checks future dates. A successful caller must reload the case before preparing a packet.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "programId",
+    "expectedFormContextId",
+    "expectedAnswerRevision",
+    "answers"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedCaseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "programId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedFormContextId": {
+      "$ref": "form-answers.schema.json#/$defs/digest"
+    },
+    "expectedAnswerRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "answers": {
+      "$ref": "form-answers.schema.json#/$defs/inputAnswers"
+    }
+  }
+}

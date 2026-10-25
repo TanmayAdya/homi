@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/evidence-delete-response.schema.json",
+  "title": "Deleted private evidence receipt v1",
+  "description": "Receipt for the requested asset deletion. Runtime checks exact scope, unchanged case revision and catalog/asset revisions incremented by one. No deleted bytes or storage reference is returned.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "caseRevision",
+    "catalogRevision",
+    "evidenceId",
+    "evidenceRevision",
+    "deleted"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "caseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "catalogRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "evidenceId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "evidenceRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "deleted": {
+      "const": true
+    }
+  }
+}

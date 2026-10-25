@@ -1,0 +1,252 @@
+[
+  {
+    "id": "matched",
+    "title": "Checks met",
+    "description": "Fictional city and plan answers match the example route. This is not a real benefit decision.",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "demo-case-matched",
+      "revision": 1,
+      "profile": {
+        "city": "Demo City",
+        "county": "Demo County",
+        "healthPlan": "Example Plan",
+        "tenure": "renter",
+        "ageYears": 65,
+        "householdSize": 1,
+        "annualIncomeUsd": 0,
+        "ownerConsentReported": false
+      },
+      "unresolvedFields": [],
+      "findings": [
+        {
+          "id": "demo-finding-entrance",
+          "room": "entrance",
+          "observation": "Fictional doorway measurement entered for an assessment demonstration.",
+          "reviewState": "confirmed",
+          "evidenceIds": [
+            "demo-evidence-entrance"
+          ],
+          "measurements": [
+            {
+              "type": "clearOpening",
+              "value": 800,
+              "unit": "mm",
+              "method": "manual",
+              "confirmed": true
+            }
+          ]
+        }
+      ]
+    },
+    "match": {
+      "schemaVersion": "1",
+      "caseId": "demo-case-matched",
+      "caseRevision": 1,
+      "evaluatedAt": "2026-10-13T19:00:00Z",
+      "evaluationDate": "2026-10-13",
+      "matches": [
+        {
+          "programId": "demo-home-support",
+          "programName": "Example assistance route",
+          "ruleVersion": "demo-v1",
+          "isDemo": true,
+          "status": "meets_known_criteria",
+          "availability": "unverified",
+          "recheckAfter": "2026-10-14T19:00:00Z",
+          "checks": [
+            {
+              "id": "city",
+              "status": "pass",
+              "reasonCode": "CITY_MATCH",
+              "explanation": "The fictional city matches the example route.",
+              "missingFields": [],
+              "resolvedBy": null,
+              "sourceIds": []
+            },
+            {
+              "id": "plan",
+              "status": "pass",
+              "reasonCode": "PLAN_MATCH",
+              "explanation": "The fictional plan matches the example route.",
+              "missingFields": [],
+              "resolvedBy": null,
+              "sourceIds": []
+            }
+          ],
+          "sources": [],
+          "requiredDocuments": [],
+          "intake": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "not-matched",
+    "title": "Check failed",
+    "description": "The fictional plan answer differs from the example route. No real program rules are used.",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "demo-case-not-matched",
+      "revision": 1,
+      "profile": {
+        "city": "Demo City",
+        "county": "Demo County",
+        "healthPlan": "Another Plan",
+        "tenure": "renter",
+        "ageYears": 65,
+        "householdSize": 1,
+        "annualIncomeUsd": null,
+        "ownerConsentReported": null
+      },
+      "unresolvedFields": [],
+      "findings": [
+        {
+          "id": "demo-finding-entrance",
+          "room": "entrance",
+          "observation": "Fictional doorway measurement entered for an assessment demonstration.",
+          "reviewState": "confirmed",
+          "evidenceIds": [
+            "demo-evidence-entrance"
+          ],
+          "measurements": [
+            {
+              "type": "clearOpening",
+              "value": 800,
+              "unit": "mm",
+              "method": "manual",
+              "confirmed": true
+            }
+          ]
+        }
+      ]
+    },
+    "match": {
+      "schemaVersion": "1",
+      "caseId": "demo-case-not-matched",
+      "caseRevision": 1,
+      "evaluatedAt": "2026-10-13T19:00:00Z",
+      "evaluationDate": "2026-10-13",
+      "matches": [
+        {
+          "programId": "demo-home-support",
+          "programName": "Example assistance route",
+          "ruleVersion": "demo-v1",
+          "isDemo": true,
+          "status": "does_not_meet_criterion",
+          "availability": "unverified",
+          "recheckAfter": "2026-10-14T19:00:00Z",
+          "checks": [
+            {
+              "id": "city",
+              "status": "pass",
+              "reasonCode": "CITY_MATCH",
+              "explanation": "The fictional city matches the example route.",
+              "missingFields": [],
+              "resolvedBy": null,
+              "sourceIds": []
+            },
+            {
+              "id": "plan",
+              "status": "fail",
+              "reasonCode": "PLAN_MISMATCH",
+              "explanation": "The fictional plan does not match the example route.",
+              "missingFields": [],
+              "resolvedBy": null,
+              "sourceIds": []
+            }
+          ],
+          "sources": [],
+          "requiredDocuments": [],
+          "intake": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "unknown",
+    "title": "Missing answer",
+    "description": "The plan answer is unknown, so the example route cannot be resolved.",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "demo-case-unknown",
+      "revision": 1,
+      "profile": {
+        "city": "Demo City",
+        "county": "Demo County",
+        "healthPlan": null,
+        "tenure": "renter",
+        "ageYears": 65,
+        "householdSize": 1,
+        "annualIncomeUsd": null,
+        "ownerConsentReported": null
+      },
+      "unresolvedFields": [
+        "profile.healthPlan"
+      ],
+      "findings": [
+        {
+          "id": "demo-finding-entrance",
+          "room": "entrance",
+          "observation": "Fictional doorway measurement entered for an assessment demonstration.",
+          "reviewState": "confirmed",
+          "evidenceIds": [
+            "demo-evidence-entrance"
+          ],
+          "measurements": [
+            {
+              "type": "clearOpening",
+              "value": 800,
+              "unit": "mm",
+              "method": "manual",
+              "confirmed": true
+            }
+          ]
+        }
+      ]
+    },
+    "match": {
+      "schemaVersion": "1",
+      "caseId": "demo-case-unknown",
+      "caseRevision": 1,
+      "evaluatedAt": "2026-10-13T19:00:00Z",
+      "evaluationDate": "2026-10-13",
+      "matches": [
+        {
+          "programId": "demo-home-support",
+          "programName": "Example assistance route",
+          "ruleVersion": "demo-v1",
+          "isDemo": true,
+          "status": "needs_confirmation",
+          "availability": "unverified",
+          "recheckAfter": "2026-10-14T19:00:00Z",
+          "checks": [
+            {
+              "id": "city",
+              "status": "pass",
+              "reasonCode": "CITY_MATCH",
+              "explanation": "The fictional city matches the example route.",
+              "missingFields": [],
+              "resolvedBy": null,
+              "sourceIds": []
+            },
+            {
+              "id": "plan",
+              "status": "unknown",
+              "reasonCode": "MISSING_PLAN",
+              "explanation": "The plan answer is missing. Ask the resident to confirm it.",
+              "missingFields": [
+                "profile.healthPlan"
+              ],
+              "resolvedBy": "resident",
+              "sourceIds": []
+            }
+          ],
+          "sources": [],
+          "requiredDocuments": [],
+          "intake": null
+        }
+      ]
+    }
+  }
+]

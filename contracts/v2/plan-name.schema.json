@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v2/plan-name.schema.json",
+  "title": "Private plan name state v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "name",
+    "nameRevision",
+    "lastMutationId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2"
+    },
+    "caseId": {
+      "$ref": "#/$defs/id"
+    },
+    "name": {
+      "$ref": "#/$defs/name"
+    },
+    "nameRevision": {
+      "$ref": "#/$defs/revision"
+    },
+    "lastMutationId": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/id"
+        }
+      ]
+    }
+  },
+  "if": {
+    "properties": {
+      "nameRevision": {
+        "const": 0
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "name": {
+        "type": "null"
+      },
+      "lastMutationId": {
+        "type": "null"
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "lastMutationId": {
+        "$ref": "#/$defs/id"
+      }
+    }
+  },
+  "description": "Independent presentation metadata. Revision zero means never named; resets are null names with positive revisions and mutation IDs. Names use at most 80 Unicode scalars, canonical trimmed single-line text. Does not change case revisions or eligibility/exports. SQL stored records must have positive revisions.",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+        }
+      ]
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  }
+}

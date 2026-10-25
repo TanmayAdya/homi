@@ -1,0 +1,48 @@
+{
+  "name": "safe-at-home-matcher",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "test:contracts": "node test/contracts.ts",
+    "demo": "node src/demo.ts",
+    "serve:demo": "node src/api/demo-server.ts",
+    "serve:durable": "node --max-old-space-size=64 --max-semi-space-size=1 src/api/durable-server.ts",
+    "migrate": "node src/storage/migrate.ts",
+    "retention": "node tool/retention.ts",
+    "complete:account-deletions": "node tool/complete-account-deletions.ts",
+    "bootstrap:runtime": "node tool/bootstrap-runtime.ts",
+    "verify:live-sessions": "node tool/verify-live-sessions.ts",
+    "verify:hosted-api": "node tool/verify-hosted-api.ts",
+    "verify:hosted-cases": "node tool/verify-hosted-cases.ts",
+    "verify:hosted-draft": "node tool/verify-hosted-draft.ts",
+    "test:postgres": "node --test test/postgres/*.test.ts",
+    "research:scfhp": "node src/research-scfhp.ts",
+    "backup": "node tool/backup.ts",
+    "capacity": "node tool/capacity.ts",
+    "operations": "node tool/operations.ts",
+    "profile:memory": "node tool/profile-memory.ts",
+    "profile:team-beta-memory": "node tool/profile-team-beta.ts",
+    "profile:team-beta-linux-memory": "node tool/profile-team-beta-linux.ts",
+    "profile:linux-memory": "node tool/profile-linux-memory.ts",
+    "profile:native-amd64": "node tool/profile-native-amd64.ts",
+    "backup:public": "node tool/backup-public.ts",
+    "operations:private": "node tool/private-operations.ts"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "@pdf-lib/fontkit": "1.1.1",
+    "pdf-lib": "1.17.1",
+    "pg": "8.23.1",
+    "sharp": "0.35.5"
+  }
+}

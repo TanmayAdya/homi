@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v2/form-answers-read-request.schema.json",
+  "title": "Administrative form answers read request v2",
+  "description": "Authenticated case-scoped read. Caller supplies neither owner identity nor source rules.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "programId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2"
+    },
+    "caseId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    },
+    "expectedCaseRevision": {
+      "$ref": "form-answers.schema.json#/$defs/positiveRevision"
+    },
+    "programId": {
+      "$ref": "form-answers.schema.json#/$defs/id"
+    }
+  }
+}

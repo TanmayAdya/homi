@@ -1,0 +1,1272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Permission-controlled sharing v3 \u2014 published allowlisted online views",
+  "$defs": {
+    "ShareScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingIds",
+        "programIds",
+        "allowHelperNotes"
+      ],
+      "properties": {
+        "findingIds": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+          },
+          "uniqueItems": true
+        },
+        "programIds": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+          },
+          "uniqueItems": true
+        },
+        "allowHelperNotes": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CaseMembership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "membershipId",
+        "caseId",
+        "grantorId",
+        "recipientId",
+        "role",
+        "scope",
+        "permissionRevision",
+        "expiresAt",
+        "invitationExpiresAt",
+        "state"
+      ],
+      "properties": {
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "grantorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "role": {
+          "enum": [
+            "viewer",
+            "helper"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "invitationExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+        },
+        "state": {
+          "enum": [
+            "pending",
+            "active",
+            "revoked",
+            "expired"
+          ]
+        },
+        "ownerLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        }
+      }
+    },
+    "SharedFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "room",
+        "observation",
+        "reviewState"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "room": {
+          "enum": [
+            "bathroom",
+            "entrance",
+            "other"
+          ]
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "reviewState": {
+          "enum": [
+            "confirmed",
+            "needs_review",
+            "dismissed"
+          ]
+        }
+      }
+    },
+    "SharedProgram": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "programId",
+        "status",
+        "occurredOn",
+        "provenance"
+      ],
+      "properties": {
+        "programId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        },
+        "occurredOn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
+        },
+        "provenance": {
+          "const": "user_reported"
+        }
+      }
+    },
+    "SharedCaseProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "sourceRevision",
+        "publishedAt",
+        "stale",
+        "summary",
+        "findings",
+        "programs"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "sourceRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "summary": {
+          "const": "Selected home safety information"
+        },
+        "findings": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/SharedFinding"
+          }
+        },
+        "programs": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/SharedProgram"
+          }
+        }
+      }
+    },
+    "SharedNote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mutationId",
+        "authorId",
+        "note",
+        "recordedAt"
+      ],
+      "properties": {
+        "mutationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "authorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+        }
+      }
+    },
+    "AccessAuditEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "actorId",
+        "at"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "invited",
+            "accepted",
+            "changed",
+            "revoked",
+            "read",
+            "note"
+          ]
+        },
+        "actorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+        }
+      }
+    },
+    "OwnerShare": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "membershipId",
+        "caseId",
+        "grantorId",
+        "recipientId",
+        "role",
+        "scope",
+        "permissionRevision",
+        "expiresAt",
+        "invitationExpiresAt",
+        "state",
+        "projection",
+        "notes",
+        "audit"
+      ],
+      "properties": {
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "grantorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "role": {
+          "enum": [
+            "viewer",
+            "helper"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "invitationExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+        },
+        "state": {
+          "enum": [
+            "pending",
+            "active",
+            "revoked",
+            "expired"
+          ]
+        },
+        "projection": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SharedCaseProjection"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SharedNote"
+          }
+        },
+        "audit": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/AccessAuditEvent"
+          }
+        },
+        "recipientLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        },
+        "ownerLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        }
+      }
+    },
+    "preview-sharing-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "expectedCaseRevision",
+        "scope"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        }
+      }
+    },
+    "preview-sharing-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "projection"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "projection": {
+          "$ref": "#/$defs/SharedCaseProjection"
+        }
+      }
+    },
+    "create-invitation-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "expectedCaseRevision",
+        "invitationId",
+        "recipientId",
+        "role",
+        "scope",
+        "expiresAt"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "invitationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "role": {
+          "enum": [
+            "viewer",
+            "helper"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recipientLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        },
+        "ownerLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        }
+      },
+      "if": {
+        "properties": {
+          "role": {
+            "const": "viewer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scope": {
+            "properties": {
+              "allowHelperNotes": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "create-invitation-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership",
+        "created",
+        "invitationCode"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        },
+        "created": {
+          "type": "boolean"
+        },
+        "invitationCode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{43}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "list-sharing-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "includeLabels": {
+          "const": true
+        }
+      }
+    },
+    "list-sharing-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "shares",
+        "availableProgramIds"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "shares": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/OwnerShare"
+          }
+        },
+        "availableProgramIds": {
+          "type": "array",
+          "maxItems": 36,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+          }
+        }
+      }
+    },
+    "change-sharing-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "expectedCaseRevision",
+        "invitationId",
+        "expectedPermissionRevision",
+        "role",
+        "scope",
+        "expiresAt"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "invitationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "role": {
+          "enum": [
+            "viewer",
+            "helper"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "role": {
+            "const": "viewer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scope": {
+            "properties": {
+              "allowHelperNotes": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "change-sharing-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        }
+      }
+    },
+    "revoke-sharing-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "invitationId",
+        "expectedPermissionRevision"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "invitationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "revoke-sharing-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        }
+      }
+    },
+    "review-invitation-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "code"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        },
+        "includeLabels": {
+          "const": true
+        }
+      }
+    },
+    "review-invitation-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        }
+      }
+    },
+    "accept-invitation-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "code",
+        "expectedPermissionRevision"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "accept-invitation-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        }
+      }
+    },
+    "list-shared-cases-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "includeLabels": {
+          "const": true
+        }
+      }
+    },
+    "list-shared-cases-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "memberships"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "memberships": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/CaseMembership"
+          }
+        }
+      }
+    },
+    "read-shared-case-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "read-shared-case-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership",
+        "projection",
+        "notes"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        },
+        "projection": {
+          "$ref": "#/$defs/SharedCaseProjection"
+        },
+        "notes": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SharedNote"
+          }
+        }
+      }
+    },
+    "add-shared-note-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "mutationId",
+        "note"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "mutationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "add-shared-note-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "membership",
+        "projection",
+        "notes"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membership": {
+          "$ref": "#/$defs/CaseMembership"
+        },
+        "projection": {
+          "$ref": "#/$defs/SharedCaseProjection"
+        },
+        "notes": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SharedNote"
+          }
+        }
+      }
+    },
+    "create-email-invitation-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "expectedCaseRevision",
+        "invitationId",
+        "recipientEmail",
+        "role",
+        "scope",
+        "expiresAt"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "invitationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "role": {
+          "enum": [
+            "viewer",
+            "helper"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recipientEmail": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 254,
+          "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\\.[A-Za-z0-9-]+)+$"
+        },
+        "recipientLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        },
+        "ownerLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        }
+      },
+      "if": {
+        "properties": {
+          "role": {
+            "const": "viewer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scope": {
+            "properties": {
+              "allowHelperNotes": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "create-email-invitation-response": {
+      "$ref": "#/$defs/create-invitation-response"
+    },
+    "list-email-sharing-request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "includeLabels": {
+          "const": true
+        }
+      }
+    },
+    "OwnerEmailShare": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "membershipId",
+        "caseId",
+        "grantorId",
+        "recipientId",
+        "role",
+        "scope",
+        "permissionRevision",
+        "expiresAt",
+        "invitationExpiresAt",
+        "state",
+        "projection",
+        "notes",
+        "audit",
+        "invitedEmail"
+      ],
+      "properties": {
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "grantorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+        },
+        "recipientId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "role": {
+          "enum": [
+            "viewer",
+            "helper"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ShareScope"
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "invitationExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d\\.\\d{3}Z$"
+        },
+        "state": {
+          "enum": [
+            "pending",
+            "active",
+            "revoked",
+            "expired"
+          ]
+        },
+        "projection": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SharedCaseProjection"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SharedNote"
+          }
+        },
+        "audit": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/AccessAuditEvent"
+          }
+        },
+        "invitedEmail": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 254,
+              "pattern": "^[a-z0-9._%+-]+@[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recipientLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        },
+        "ownerLabel": {
+          "$ref": "#/$defs/SharingLabel"
+        }
+      }
+    },
+    "list-email-sharing-response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "shares",
+        "availableProgramIds"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "shares": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/OwnerEmailShare"
+          }
+        },
+        "availableProgramIds": {
+          "type": "array",
+          "maxItems": 36,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\x00-\\x1f\\x7f-\\x9f]+$"
+          }
+        }
+      }
+    },
+    "SharingLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^\\s\\x00-\\x1f\\x7f-\\x9f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069](?:[^\\x00-\\x1f\\x7f-\\x9f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]*[^\\s\\x00-\\x1f\\x7f-\\x9f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069])?$",
+      "description": "Optional owner-typed label, trimmed, at most 80 characters. Not a verified identity."
+    }
+  },
+  "description": "Raw profile, photos, intake, forms, PDFs, exports, measurements and unselected programs are excluded. Viewer never grants helper notes. Relationship confers no professional authority. Optional labels are owner-typed: recipientLabel is returned only to the owner, ownerLabel only when a list/review request opts in with includeLabels; legacy shapes stay exact."
+}

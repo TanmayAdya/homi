@@ -1,0 +1,529 @@
+[
+  {
+    "route": "list-sensitive-options",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "caseId": "fictional-shared-case",
+      "caseRevision": 2,
+      "catalogRevision": 1,
+      "content": {
+        "photos": [
+          {
+            "evidenceId": "fictional-photo",
+            "evidenceRevision": 1,
+            "caseId": "fictional-shared-case",
+            "findingId": "fictional-finding",
+            "mediaType": "image/png",
+            "byteLength": 1930,
+            "sha256": "d147f6d8b14e15e0063f3e6c4756f74ff472e70e0460322eb2b03e38cd8d4659",
+            "width": 320,
+            "height": 200,
+            "capturedAt": null,
+            "preparedAt": "2026-10-24T12:00:00.000Z",
+            "processingVersion": "evidence-png-v1"
+          }
+        ],
+        "measurements": [
+          {
+            "id": "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b",
+            "findingId": "fictional-finding",
+            "type": "clear_width",
+            "value": 750,
+            "unit": "mm",
+            "method": "manual",
+            "confirmed": true
+          }
+        ],
+        "answers": [
+          {
+            "id": "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+            "programId": "scfhp-eaa",
+            "key": "estimatedCostUsd",
+            "label": "Estimated project cost",
+            "category": "financial",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+            "programId": "scfhp-eaa",
+            "key": "professionalOrderReported",
+            "label": "Professional order available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452",
+            "programId": "scfhp-eaa",
+            "key": "professionalEvaluationReported",
+            "label": "Evaluation available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": null,
+            "reviewState": "unknown"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "route": "preview-sensitive-sharing",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "expectedCaseRevision": 2,
+      "expectedCatalogRevision": 1,
+      "selection": {
+        "photoIds": [
+          "fictional-photo"
+        ],
+        "measurementIds": [
+          "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b"
+        ],
+        "answerIds": [
+          "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+          "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+          "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452"
+        ]
+      },
+      "allowPdf": true,
+      "expiresAt": "2030-01-01T00:00:00.000Z"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "caseId": "fictional-shared-case",
+      "caseRevision": 2,
+      "catalogRevision": 1,
+      "content": {
+        "photos": [
+          {
+            "evidenceId": "fictional-photo",
+            "evidenceRevision": 1,
+            "caseId": "fictional-shared-case",
+            "findingId": "fictional-finding",
+            "mediaType": "image/png",
+            "byteLength": 1930,
+            "sha256": "d147f6d8b14e15e0063f3e6c4756f74ff472e70e0460322eb2b03e38cd8d4659",
+            "width": 320,
+            "height": 200,
+            "capturedAt": null,
+            "preparedAt": "2026-10-24T12:00:00.000Z",
+            "processingVersion": "evidence-png-v1"
+          }
+        ],
+        "measurements": [
+          {
+            "id": "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b",
+            "findingId": "fictional-finding",
+            "type": "clear_width",
+            "value": 750,
+            "unit": "mm",
+            "method": "manual",
+            "confirmed": true
+          }
+        ],
+        "answers": [
+          {
+            "id": "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+            "programId": "scfhp-eaa",
+            "key": "estimatedCostUsd",
+            "label": "Estimated project cost",
+            "category": "financial",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+            "programId": "scfhp-eaa",
+            "key": "professionalOrderReported",
+            "label": "Professional order available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452",
+            "programId": "scfhp-eaa",
+            "key": "professionalEvaluationReported",
+            "label": "Evaluation available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": null,
+            "reviewState": "unknown"
+          }
+        ]
+      },
+      "selection": {
+        "photoIds": [
+          "fictional-photo"
+        ],
+        "measurementIds": [
+          "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b"
+        ],
+        "answerIds": [
+          "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+          "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+          "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452"
+        ]
+      },
+      "allowPdf": true,
+      "expiresAt": "2030-01-01T00:00:00.000Z",
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "acknowledgedMutationId": null
+    }
+  },
+  {
+    "route": "publish-sensitive-sharing",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "expectedCaseRevision": 2,
+      "expectedCatalogRevision": 1,
+      "selection": {
+        "photoIds": [
+          "fictional-photo"
+        ],
+        "measurementIds": [
+          "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b"
+        ],
+        "answerIds": [
+          "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+          "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+          "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452"
+        ]
+      },
+      "allowPdf": true,
+      "expiresAt": "2030-01-01T00:00:00.000Z",
+      "previewHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mutationId": "55555555-5555-4555-8555-555555555555"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 3,
+      "caseId": "fictional-shared-case",
+      "caseRevision": 2,
+      "catalogRevision": 1,
+      "content": {
+        "photos": [
+          {
+            "evidenceId": "fictional-photo",
+            "evidenceRevision": 1,
+            "caseId": "fictional-shared-case",
+            "findingId": "fictional-finding",
+            "mediaType": "image/png",
+            "byteLength": 1930,
+            "sha256": "d147f6d8b14e15e0063f3e6c4756f74ff472e70e0460322eb2b03e38cd8d4659",
+            "width": 320,
+            "height": 200,
+            "capturedAt": null,
+            "preparedAt": "2026-10-24T12:00:00.000Z",
+            "processingVersion": "evidence-png-v1"
+          }
+        ],
+        "measurements": [
+          {
+            "id": "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b",
+            "findingId": "fictional-finding",
+            "type": "clear_width",
+            "value": 750,
+            "unit": "mm",
+            "method": "manual",
+            "confirmed": true
+          }
+        ],
+        "answers": [
+          {
+            "id": "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+            "programId": "scfhp-eaa",
+            "key": "estimatedCostUsd",
+            "label": "Estimated project cost",
+            "category": "financial",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+            "programId": "scfhp-eaa",
+            "key": "professionalOrderReported",
+            "label": "Professional order available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452",
+            "programId": "scfhp-eaa",
+            "key": "professionalEvaluationReported",
+            "label": "Evaluation available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": null,
+            "reviewState": "unknown"
+          }
+        ]
+      },
+      "selection": {
+        "photoIds": [
+          "fictional-photo"
+        ],
+        "measurementIds": [
+          "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b"
+        ],
+        "answerIds": [
+          "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+          "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+          "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452"
+        ]
+      },
+      "allowPdf": true,
+      "expiresAt": "2030-01-01T00:00:00.000Z",
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "acknowledgedMutationId": "55555555-5555-4555-8555-555555555555"
+    }
+  },
+  {
+    "route": "read-sensitive-sharing",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "caseId": "fictional-shared-case",
+      "caseRevision": 2,
+      "catalogRevision": 1,
+      "content": {
+        "photos": [
+          {
+            "evidenceId": "fictional-photo",
+            "evidenceRevision": 1,
+            "caseId": "fictional-shared-case",
+            "findingId": "fictional-finding",
+            "mediaType": "image/png",
+            "byteLength": 1930,
+            "sha256": "d147f6d8b14e15e0063f3e6c4756f74ff472e70e0460322eb2b03e38cd8d4659",
+            "width": 320,
+            "height": 200,
+            "capturedAt": null,
+            "preparedAt": "2026-10-24T12:00:00.000Z",
+            "processingVersion": "evidence-png-v1"
+          }
+        ],
+        "measurements": [
+          {
+            "id": "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b",
+            "findingId": "fictional-finding",
+            "type": "clear_width",
+            "value": 750,
+            "unit": "mm",
+            "method": "manual",
+            "confirmed": true
+          }
+        ],
+        "answers": [
+          {
+            "id": "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+            "programId": "scfhp-eaa",
+            "key": "estimatedCostUsd",
+            "label": "Estimated project cost",
+            "category": "financial",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": 0,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+            "programId": "scfhp-eaa",
+            "key": "professionalOrderReported",
+            "label": "Professional order available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": false,
+            "reviewState": "reported"
+          },
+          {
+            "id": "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452",
+            "programId": "scfhp-eaa",
+            "key": "professionalEvaluationReported",
+            "label": "Evaluation available?",
+            "category": "health",
+            "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+            "intakeRevision": 1,
+            "value": null,
+            "reviewState": "unknown"
+          }
+        ]
+      },
+      "selection": {
+        "photoIds": [
+          "fictional-photo"
+        ],
+        "measurementIds": [
+          "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b"
+        ],
+        "answerIds": [
+          "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+          "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+          "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452"
+        ]
+      },
+      "allowPdf": true,
+      "expiresAt": "2030-01-01T00:00:00.000Z",
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "acknowledgedMutationId": null
+    }
+  },
+  {
+    "route": "preview-sensitive-photo",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "expectedCaseRevision": 2,
+      "expectedCatalogRevision": 1,
+      "evidenceId": "fictional-photo",
+      "expectedEvidenceRevision": 1
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "descriptor": {
+        "evidenceId": "fictional-photo",
+        "evidenceRevision": 1,
+        "caseId": "fictional-shared-case",
+        "findingId": "fictional-finding",
+        "mediaType": "image/png",
+        "byteLength": 1930,
+        "sha256": "d147f6d8b14e15e0063f3e6c4756f74ff472e70e0460322eb2b03e38cd8d4659",
+        "width": 320,
+        "height": 200,
+        "capturedAt": null,
+        "preparedAt": "2026-10-24T12:00:00.000Z",
+        "processingVersion": "evidence-png-v1"
+      },
+      "photoBase64": "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"
+    }
+  },
+  {
+    "route": "read-sensitive-photo",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "evidenceId": "fictional-photo",
+      "expectedEvidenceRevision": 1
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "descriptor": {
+        "evidenceId": "fictional-photo",
+        "evidenceRevision": 1,
+        "caseId": "fictional-shared-case",
+        "findingId": "fictional-finding",
+        "mediaType": "image/png",
+        "byteLength": 1930,
+        "sha256": "d147f6d8b14e15e0063f3e6c4756f74ff472e70e0460322eb2b03e38cd8d4659",
+        "width": 320,
+        "height": 200,
+        "capturedAt": null,
+        "preparedAt": "2026-10-24T12:00:00.000Z",
+        "processingVersion": "evidence-png-v1"
+      },
+      "photoBase64": "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"
+    }
+  },
+  {
+    "route": "preview-sensitive-report",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "expectedCaseRevision": 2,
+      "expectedCatalogRevision": 1,
+      "selection": {
+        "photoIds": [
+          "fictional-photo"
+        ],
+        "measurementIds": [
+          "measurement-cbce10a6d2a26d63cb172876e58d8aa57f10e3ff4b45e74a228459b2409cfb0b"
+        ],
+        "answerIds": [
+          "answer-e9b7d946964f36b4c7edbc41902d64936b69bba5aa31b2218ae0e4c9ff6eec87",
+          "answer-c72d615bf9ad247bdfa256ea25a76ac326b2fc930fec331691dc8f36002a0ad9",
+          "answer-23911b2275c0b5a3b301ab13119eefc0a616766d7c93898bac4e74b3b9742452"
+        ]
+      },
+      "allowPdf": true,
+      "expiresAt": "2030-01-01T00:00:00.000Z",
+      "previewHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "report": {
+        "pdfBase64": "JVBERi0xLjcKJYGBgYEKCjYgMCBvYmoKPDwKL0ZpbHRlciAvRmxhdGVEZWNvZGUKL0xlbmd0aCAxOTYKPj4Kc3RyZWFtCnicbc7BagJBDAbge54iZ6GaSTLJDJSCdWfpwYswLyCiorQHpfT5m92eFspAhvyB5HvAewdaU0FaJ4vC+LzC5uP8+XP+vp2OL061aCEvFRNhvwAr9j0kpHgJtaBr5F/wqmbVxDXqaM2S7ZhsF91gNdJsyuRs2clGZ1duTDpEnlw8TxObuuYqWyZxyUKxYbCB2xv2O/QVtA4HeMzmGbC0xhm2wtkK1n+pkv+kYfFsEpcX2tkgk262RiKJicfpXwh+AXxRQ3kKZW5kc3RyZWFtCmVuZG9iagoKNyAwIG9iago8PAovRmlsdGVyIC9GbGF0ZURlY29kZQovVHlwZSAvT2JqU3RtCi9OIDUKL0ZpcnN0IDI2Ci9MZW5ndGggNDI1Cj4+CnN0cmVhbQp4nNVTwWrcMBC96yvmmB6KZK0s2WFZ2OzaLYTQsAkkJOTg2GJxWaRia0P6952RtElzKD0HM8gz772ZkZgpQIAEpWABpgIFWmsowagKlkvGb3//ssCvu72dGb8chxkeERWwgyfGN/7oAhRstWLv3E0XuoPfsySCgsgnxvXkh2NvJ1i2TdsKYYQQWqFpIeQWzw1ajSbRR0xW+I9mVDaMmYUQizVibTJtkobwyC2zvsETuZo428RVVfLf6lKtJuWQ/+unXjF+5YdtFyycbc+lkLoQskTQKP3wBZ9jsl3wn/dysf/Ru3/f8HYMB3u6n9JZv8j91bkfqlmk/DLfSZe5XvkXv0z9xF5U0ph8Rp1MnNh3m3yjVh+nrfUuMH5zfA7RpWDB+EU3W0KAf7eHFxvGvmO8cb0fRrcHfje6tZvHU+BjRhpbGt7J0mzH6eU7O/vj1OM4Ey9mpp+35F+NqCt8f1PVuEFR8o7VRkldyVJXGcNy/P7H80/bxzTkNq/h202gd08Bil3ZYewu/CtunMBPFxJMLWnv1s75QJsYd9AF7JQ8nfcSxX8AqorpGwplbmRzdHJlYW0KZW5kb2JqCgo4IDAgb2JqCjw8Ci9TaXplIDkKL1Jvb3QgMiAwIFIKL0luZm8gMyAwIFIKL0ZpbHRlciAvRmxhdGVEZWNvZGUKL1R5cGUgL1hSZWYKL0xlbmd0aCA0MgovVyBbIDEgMiAyIF0KL0luZGV4IFsgMCA5IF0KPj4Kc3RyZWFtCnicY2Bg+P+fiYGdgQFEMIIIJhDBDCJYGBkEGBgYGWWBBLMOAwMAWxsClgplbmRzdHJlYW0KZW5kb2JqCgpzdGFydHhyZWYKODEyCiUlRU9G",
+        "sha256": "c29fce3c02b7c47334658032399628c7c3de21d2b5fc685e7ed7c0336cf1bca7",
+        "pageCount": 1
+      }
+    }
+  },
+  {
+    "route": "read-sensitive-report",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "permissionRevision": 2,
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "report": {
+        "pdfBase64": "JVBERi0xLjcKJYGBgYEKCjYgMCBvYmoKPDwKL0ZpbHRlciAvRmxhdGVEZWNvZGUKL0xlbmd0aCAxOTYKPj4Kc3RyZWFtCnicbc7BagJBDAbge54iZ6GaSTLJDJSCdWfpwYswLyCiorQHpfT5m92eFspAhvyB5HvAewdaU0FaJ4vC+LzC5uP8+XP+vp2OL061aCEvFRNhvwAr9j0kpHgJtaBr5F/wqmbVxDXqaM2S7ZhsF91gNdJsyuRs2clGZ1duTDpEnlw8TxObuuYqWyZxyUKxYbCB2xv2O/QVtA4HeMzmGbC0xhm2wtkK1n+pkv+kYfFsEpcX2tkgk262RiKJicfpXwh+AXxRQ3kKZW5kc3RyZWFtCmVuZG9iagoKNyAwIG9iago8PAovRmlsdGVyIC9GbGF0ZURlY29kZQovVHlwZSAvT2JqU3RtCi9OIDUKL0ZpcnN0IDI2Ci9MZW5ndGggNDI1Cj4+CnN0cmVhbQp4nNVTwWrcMBC96yvmmB6KZK0s2WFZ2OzaLYTQsAkkJOTg2GJxWaRia0P6952RtElzKD0HM8gz772ZkZgpQIAEpWABpgIFWmsowagKlkvGb3//ssCvu72dGb8chxkeERWwgyfGN/7oAhRstWLv3E0XuoPfsySCgsgnxvXkh2NvJ1i2TdsKYYQQWqFpIeQWzw1ajSbRR0xW+I9mVDaMmYUQizVibTJtkobwyC2zvsETuZo428RVVfLf6lKtJuWQ/+unXjF+5YdtFyycbc+lkLoQskTQKP3wBZ9jsl3wn/dysf/Ru3/f8HYMB3u6n9JZv8j91bkfqlmk/DLfSZe5XvkXv0z9xF5U0ph8Rp1MnNh3m3yjVh+nrfUuMH5zfA7RpWDB+EU3W0KAf7eHFxvGvmO8cb0fRrcHfje6tZvHU+BjRhpbGt7J0mzH6eU7O/vj1OM4Ey9mpp+35F+NqCt8f1PVuEFR8o7VRkldyVJXGcNy/P7H80/bxzTkNq/h202gd08Bil3ZYewu/CtunMBPFxJMLWnv1s75QJsYd9AF7JQ8nfcSxX8AqorpGwplbmRzdHJlYW0KZW5kb2JqCgo4IDAgb2JqCjw8Ci9TaXplIDkKL1Jvb3QgMiAwIFIKL0luZm8gMyAwIFIKL0ZpbHRlciAvRmxhdGVEZWNvZGUKL1R5cGUgL1hSZWYKL0xlbmd0aCA0MgovVyBbIDEgMiAyIF0KL0luZGV4IFsgMCA5IF0KPj4Kc3RyZWFtCnicY2Bg+P+fiYGdgQFEMIIIJhDBDCJYGBkEGBgYGWWBBLMOAwMAWxsClgplbmRzdHJlYW0KZW5kb2JqCgpzdGFydHhyZWYKODEyCiUlRU9G",
+        "sha256": "c29fce3c02b7c47334658032399628c7c3de21d2b5fc685e7ed7c0336cf1bca7",
+        "pageCount": 1
+      }
+    }
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "source": "roomplan",
+    "request": {
+      "schemaVersion": "3",
+      "caseId": "11111111-0000-4000-8000-000000000001",
+      "roomId": null,
+      "expectedCaseRevision": 1,
+      "expectedModelRevision": 0,
+      "mutationId": "44444444-0000-4000-8000-000000000001",
+      "reviewJson": "{\"version\":1,\"caseId\":\"11111111-0000-4000-8000-000000000001\",\"scene\":{\"schemaVersion\":1,\"scanId\":\"22222222-0000-4000-8000-000000000001\",\"source\":\"roomplan\",\"sourceVersion\":\"roomplan fictional fixture\",\"capturedAt\":\"2026-10-24T18:00:00.000Z\",\"units\":\"m\",\"coordinateSystem\":\"right_handed_y_up\",\"coverage\":\"partial\",\"truncated\":false,\"warnings\":[],\"elements\":[{\"id\":\"surface-1\",\"kind\":\"door\",\"nativeCategory\":\"door\",\"dimensions\":[1.0,2.0,0.0],\"transform\":[1.0,0.0,-0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,1.0],\"classificationConfidence\":\"high\"}],\"points\":[]},\"pendingScanId\":null,\"reviewed\":[\"surface-1\"],\"labels\":{\"surface-1\":\"door\"},\"difficulties\":[\"enteringBathroom\"],\"dismissed\":[]}"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "11111111-0000-4000-8000-000000000001",
+      "roomId": null,
+      "caseRevision": 1,
+      "modelRevision": 1,
+      "reviewJson": "{\"version\":1,\"caseId\":\"11111111-0000-4000-8000-000000000001\",\"scene\":{\"schemaVersion\":1,\"scanId\":\"22222222-0000-4000-8000-000000000001\",\"source\":\"roomplan\",\"sourceVersion\":\"roomplan fictional fixture\",\"capturedAt\":\"2026-10-24T18:00:00.000Z\",\"units\":\"m\",\"coordinateSystem\":\"right_handed_y_up\",\"coverage\":\"partial\",\"truncated\":false,\"warnings\":[],\"elements\":[{\"id\":\"surface-1\",\"kind\":\"door\",\"nativeCategory\":\"door\",\"dimensions\":[1.0,2.0,0.0],\"transform\":[1.0,0.0,-0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,1.0],\"classificationConfidence\":\"high\"}],\"points\":[]},\"pendingScanId\":null,\"reviewed\":[\"surface-1\"],\"labels\":{\"surface-1\":\"door\"},\"difficulties\":[\"enteringBathroom\"],\"dismissed\":[]}",
+      "reviewSha256": "f85d24d8439ff948596b6bb2fbabd6920b5d25bc766c9a5ae27c3d5c4875c2fa",
+      "updatedAt": "2026-10-24T18:00:00.000Z",
+      "updatedBy": "fictional-owner",
+      "acknowledgedMutationId": "44444444-0000-4000-8000-000000000001"
+    }
+  },
+  {
+    "source": "arcore",
+    "request": {
+      "schemaVersion": "3",
+      "caseId": "11111111-0000-4000-8000-000000000001",
+      "roomId": "room-1",
+      "expectedCaseRevision": 1,
+      "expectedModelRevision": 0,
+      "mutationId": "44444444-0000-4000-8000-000000000002",
+      "reviewJson": "{\"version\":2,\"caseId\":\"11111111-0000-4000-8000-000000000001\",\"roomId\":\"room-1\",\"roomType\":\"bedroom\",\"scene\":{\"schemaVersion\":1,\"scanId\":\"22222222-0000-4000-8000-000000000002\",\"source\":\"arcore\",\"sourceVersion\":\"arcore fictional fixture\",\"capturedAt\":\"2026-10-24T18:00:00.000Z\",\"units\":\"m\",\"coordinateSystem\":\"right_handed_y_up\",\"coverage\":\"partial\",\"truncated\":false,\"warnings\":[],\"elements\":[{\"id\":\"surface-1\",\"kind\":\"unknown\",\"nativeCategory\":\"horizontal_upward\",\"dimensions\":[2.0,0.0,3.0],\"transform\":[1.0,0.0,-0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,1.0],\"classificationConfidence\":\"unknown\"}],\"points\":[]},\"pendingScanId\":null,\"reviewed\":[\"surface-1\"],\"labels\":{\"surface-1\":\"door\"},\"difficulties\":[\"enteringBathroom\"],\"dismissed\":[]}"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "11111111-0000-4000-8000-000000000001",
+      "roomId": "room-1",
+      "caseRevision": 1,
+      "modelRevision": 1,
+      "reviewJson": "{\"version\":2,\"caseId\":\"11111111-0000-4000-8000-000000000001\",\"roomId\":\"room-1\",\"roomType\":\"bedroom\",\"scene\":{\"schemaVersion\":1,\"scanId\":\"22222222-0000-4000-8000-000000000002\",\"source\":\"arcore\",\"sourceVersion\":\"arcore fictional fixture\",\"capturedAt\":\"2026-10-24T18:00:00.000Z\",\"units\":\"m\",\"coordinateSystem\":\"right_handed_y_up\",\"coverage\":\"partial\",\"truncated\":false,\"warnings\":[],\"elements\":[{\"id\":\"surface-1\",\"kind\":\"unknown\",\"nativeCategory\":\"horizontal_upward\",\"dimensions\":[2.0,0.0,3.0],\"transform\":[1.0,0.0,-0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,1.0],\"classificationConfidence\":\"unknown\"}],\"points\":[]},\"pendingScanId\":null,\"reviewed\":[\"surface-1\"],\"labels\":{\"surface-1\":\"door\"},\"difficulties\":[\"enteringBathroom\"],\"dismissed\":[]}",
+      "reviewSha256": "3437bc54afe02c35140b0232b3a009ed2cac2dca2e99b087b7a0541101caebf2",
+      "updatedAt": "2026-10-24T18:00:00.000Z",
+      "updatedBy": "fictional-owner",
+      "acknowledgedMutationId": "44444444-0000-4000-8000-000000000002"
+    }
+  },
+  {
+    "source": "arkit",
+    "request": {
+      "schemaVersion": "3",
+      "caseId": "11111111-0000-4000-8000-000000000001",
+      "roomId": "room-2",
+      "expectedCaseRevision": 1,
+      "expectedModelRevision": 0,
+      "mutationId": "44444444-0000-4000-8000-000000000003",
+      "reviewJson": "{\"version\":2,\"caseId\":\"11111111-0000-4000-8000-000000000001\",\"roomId\":\"room-2\",\"roomType\":\"bedroom\",\"scene\":{\"schemaVersion\":2,\"scanId\":\"22222222-0000-4000-8000-000000000003\",\"source\":\"arkit\",\"sourceVersion\":\"arkit fictional fixture\",\"capturedAt\":\"2026-10-24T18:00:00.000Z\",\"units\":\"m\",\"coordinateSystem\":\"right_handed_y_up\",\"coverage\":\"partial\",\"truncated\":false,\"warnings\":[\"depth_unavailable\"],\"elements\":[{\"id\":\"surface-1\",\"kind\":\"unknown\",\"nativeCategory\":\"horizontal\",\"dimensions\":[2.0,0.0,3.0],\"transform\":[1.0,0.0,-0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,1.0],\"classificationConfidence\":\"unknown\"}],\"points\":[],\"measurements\":[{\"id\":\"33333333-0000-4000-8000-000000000001\",\"start\":[0.0,0.0,0.0],\"end\":[1.0,0.0,0.0]}]},\"pendingScanId\":null,\"reviewed\":[\"surface-1\"],\"labels\":{\"surface-1\":\"door\"},\"difficulties\":[\"enteringBathroom\"],\"dismissed\":[]}"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "11111111-0000-4000-8000-000000000001",
+      "roomId": "room-2",
+      "caseRevision": 1,
+      "modelRevision": 1,
+      "reviewJson": "{\"version\":2,\"caseId\":\"11111111-0000-4000-8000-000000000001\",\"roomId\":\"room-2\",\"roomType\":\"bedroom\",\"scene\":{\"schemaVersion\":2,\"scanId\":\"22222222-0000-4000-8000-000000000003\",\"source\":\"arkit\",\"sourceVersion\":\"arkit fictional fixture\",\"capturedAt\":\"2026-10-24T18:00:00.000Z\",\"units\":\"m\",\"coordinateSystem\":\"right_handed_y_up\",\"coverage\":\"partial\",\"truncated\":false,\"warnings\":[\"depth_unavailable\"],\"elements\":[{\"id\":\"surface-1\",\"kind\":\"unknown\",\"nativeCategory\":\"horizontal\",\"dimensions\":[2.0,0.0,3.0],\"transform\":[1.0,0.0,-0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,1.0],\"classificationConfidence\":\"unknown\"}],\"points\":[],\"measurements\":[{\"id\":\"33333333-0000-4000-8000-000000000001\",\"start\":[0.0,0.0,0.0],\"end\":[1.0,0.0,0.0]}]},\"pendingScanId\":null,\"reviewed\":[\"surface-1\"],\"labels\":{\"surface-1\":\"door\"},\"difficulties\":[\"enteringBathroom\"],\"dismissed\":[]}",
+      "reviewSha256": "2c351b3bf1b7c707e911e344b03394a006bffc4afb7dee2ebefbd669b09d733e",
+      "updatedAt": "2026-10-24T18:00:00.000Z",
+      "updatedBy": "fictional-owner",
+      "acknowledgedMutationId": "44444444-0000-4000-8000-000000000003"
+    }
+  }
+]

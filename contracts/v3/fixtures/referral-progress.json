@@ -1,0 +1,57 @@
+{
+  "localSource": {
+    "id": "fictional-local-follow-up",
+    "providerId": "referral-211-national",
+    "title": "Ask about local repair referrals",
+    "responsible": "Fictional resident",
+    "dueDate": "2026-11-01",
+    "findingId": null,
+    "createdAt": "2026-10-24T12:00:00.000Z",
+    "completedAt": null
+  },
+  "save": {
+    "schemaVersion": "3",
+    "includeReferrals": true,
+    "caseId": "fictional-referral-plan",
+    "expectedCaseRevision": 1,
+    "expectedProgressRevision": 0,
+    "mutationId": "fictional-referral-mutation",
+    "operation": {
+      "type": "put_task",
+      "task": {
+        "id": "fictional-shared-referral-task",
+        "programId": null,
+        "findingId": null,
+        "formId": null,
+        "title": "Ask about local repair referrals",
+        "kind": "follow_up",
+        "state": "pending",
+        "responsiblePerson": "Fictional resident",
+        "dueOn": null,
+        "basedOnCaseRevision": 1,
+        "basedOnRuleVersion": null,
+        "revision": 1,
+        "sourceEventId": null,
+        "referral": {
+          "providerId": "referral-211-national",
+          "imported": {
+            "sourceTaskId": "fictional-local-follow-up",
+            "sourceHash": "7004e9fe781552f2c2d7d9578fa2428e9cf3b683278a8fd96befe726faffa6e0",
+            "original": {
+              "id": "fictional-local-follow-up",
+              "providerId": "referral-211-national",
+              "title": "Ask about local repair referrals",
+              "responsible": "Fictional resident",
+              "dueDate": "2026-11-01",
+              "findingId": null,
+              "createdAt": "2026-10-24T12:00:00.000Z",
+              "completedAt": null
+            },
+            "contactNote": "Fictional contact note"
+          }
+        }
+      },
+      "expectedTaskRevision": 0
+    }
+  }
+}

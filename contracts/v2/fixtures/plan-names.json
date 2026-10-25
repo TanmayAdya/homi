@@ -1,0 +1,59 @@
+{
+  "initial": {
+    "schemaVersion": "2",
+    "caseId": "fictional-home-plan",
+    "name": null,
+    "nameRevision": 0,
+    "lastMutationId": null
+  },
+  "mutations": [
+    {
+      "request": {
+        "schemaVersion": "2",
+        "caseId": "fictional-home-plan",
+        "expectedNameRevision": 0,
+        "mutationId": "fictional-name-1",
+        "name": "Fictional family home 🏡"
+      },
+      "result": {
+        "schemaVersion": "2",
+        "caseId": "fictional-home-plan",
+        "name": "Fictional family home 🏡",
+        "nameRevision": 1,
+        "lastMutationId": "fictional-name-1"
+      }
+    },
+    {
+      "request": {
+        "schemaVersion": "2",
+        "caseId": "fictional-home-plan",
+        "expectedNameRevision": 1,
+        "mutationId": "fictional-name-2",
+        "name": "Fictional upstairs plan"
+      },
+      "result": {
+        "schemaVersion": "2",
+        "caseId": "fictional-home-plan",
+        "name": "Fictional upstairs plan",
+        "nameRevision": 2,
+        "lastMutationId": "fictional-name-2"
+      }
+    },
+    {
+      "request": {
+        "schemaVersion": "2",
+        "caseId": "fictional-home-plan",
+        "expectedNameRevision": 2,
+        "mutationId": "fictional-name-3",
+        "name": null
+      },
+      "result": {
+        "schemaVersion": "2",
+        "caseId": "fictional-home-plan",
+        "name": null,
+        "nameRevision": 3,
+        "lastMutationId": "fictional-name-3"
+      }
+    }
+  ]
+}

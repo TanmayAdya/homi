@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/match.schema.json",
+  "title": "Match response v1",
+  "description": "Explained checks, not an approval. evaluatedAt is a UTC timestamp; evaluationDate is the explicit policy evaluation date. Null recheckAfter means freshness is unresolved.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "caseRevision", "evaluatedAt", "evaluationDate", "matches"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "caseId": {"type": "string", "minLength": 1},
+    "caseRevision": {"type": "integer", "minimum": 1},
+    "evaluatedAt": {"$ref": "#/$defs/instant"},
+    "evaluationDate": {"$ref": "#/$defs/date"},
+    "matches": {"type": "array", "items": {"$ref": "#/$defs/programMatch"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "stringList": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "date": {"type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "nullableDate": {"type": ["string", "null"], "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "instant": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"},
+    "nullableInstant": {"type": ["string", "null"], "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"},
+    "programMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["programId", "programName", "ruleVersion", "isDemo", "status", "availability", "recheckAfter", "checks", "sources", "requiredDocuments", "intake"],
+      "properties": {
+        "programId": {"$ref": "#/$defs/text"},
+        "programName": {"$ref": "#/$defs/text"},
+        "ruleVersion": {"$ref": "#/$defs/text"},
+        "isDemo": {"type": "boolean"},
+        "status": {"enum": ["meets_known_criteria", "does_not_meet_criterion", "needs_confirmation"]},
+        "availability": {"enum": ["unverified", "accepting", "not_accepting"]},
+        "recheckAfter": {"$ref": "#/$defs/nullableInstant"},
+        "checks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/check"}},
+        "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+        "requiredDocuments": {"$ref": "#/$defs/stringList"},
+        "intake": {"type": ["string", "null"], "minLength": 1}
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "reasonCode", "explanation", "missingFields", "resolvedBy", "sourceIds"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"},
+        "status": {"enum": ["pass", "fail", "unknown"]},
+        "reasonCode": {"$ref": "#/$defs/text"},
+        "explanation": {"$ref": "#/$defs/text"},
+        "missingFields": {"$ref": "#/$defs/stringList"},
+        "resolvedBy": {"enum": ["resident", "program", "professional", null]},
+        "sourceIds": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "url", "title", "reviewedOn", "effectiveFrom", "effectiveUntil"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"},
+        "url": {"type": "string", "format": "uri", "pattern": "^https?://[^/\\s]+"},
+        "title": {"$ref": "#/$defs/text"},
+        "reviewedOn": {"$ref": "#/$defs/date"},
+        "effectiveFrom": {"$ref": "#/$defs/nullableDate"},
+        "effectiveUntil": {"$ref": "#/$defs/nullableDate"}
+      }
+    }
+  }
+}

@@ -1,0 +1,1018 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safeathome.example/contracts/v3/sensitive-sharing.schema.json",
+  "title": "Explicit selected-data helper access; independent default-off capability",
+  "$defs": {
+    "selection": {
+      "type": "object",
+      "properties": {
+        "photoIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "measurementIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "answerIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "maxItems": 32,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "photoIds",
+        "measurementIds",
+        "answerIds"
+      ],
+      "additionalProperties": false
+    },
+    "photo": {
+      "type": "object",
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "evidenceRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "findingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "mediaType": {
+          "const": "image/png"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "capturedAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "preparedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "processingVersion": {
+          "const": "evidence-png-v1"
+        }
+      },
+      "required": [
+        "evidenceId",
+        "evidenceRevision",
+        "caseId",
+        "findingId",
+        "mediaType",
+        "byteLength",
+        "sha256",
+        "width",
+        "height",
+        "capturedAt",
+        "preparedAt",
+        "processingVersion"
+      ],
+      "additionalProperties": false
+    },
+    "measurement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "findingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "const": "mm"
+        },
+        "method": {
+          "enum": [
+            "manual",
+            "estimated"
+          ]
+        },
+        "confirmed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "findingId",
+        "type",
+        "value",
+        "unit",
+        "method",
+        "confirmed"
+      ],
+      "additionalProperties": false
+    },
+    "answer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "programId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "category": {
+          "enum": [
+            "financial",
+            "health",
+            "private"
+          ]
+        },
+        "questionnaireVersion": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "intakeRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "maxLength": 600
+            }
+          ]
+        },
+        "reviewState": {
+          "enum": [
+            "reported",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "programId",
+        "key",
+        "label",
+        "category",
+        "questionnaireVersion",
+        "intakeRevision",
+        "value",
+        "reviewState"
+      ],
+      "additionalProperties": false
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "photos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/photo"
+          },
+          "maxItems": 192
+        },
+        "measurements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/measurement"
+          },
+          "maxItems": 1024
+        },
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/answer"
+          },
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "photos",
+        "measurements",
+        "answers"
+      ],
+      "additionalProperties": false
+    },
+    "list-sensitive-options-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision"
+      ],
+      "additionalProperties": false
+    },
+    "list-sensitive-options-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "caseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "catalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "content": {
+          "$ref": "#/$defs/content"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "caseId",
+        "caseRevision",
+        "catalogRevision",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "read-sensitive-sharing-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision"
+      ],
+      "additionalProperties": false
+    },
+    "read-sensitive-sharing-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "caseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "catalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "content": {
+          "$ref": "#/$defs/content"
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        },
+        "allowPdf": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "acknowledgedMutationId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "caseId",
+        "caseRevision",
+        "catalogRevision",
+        "content",
+        "selection",
+        "allowPdf",
+        "expiresAt",
+        "sourceHash",
+        "acknowledgedMutationId"
+      ],
+      "additionalProperties": false
+    },
+    "preview-sensitive-sharing-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCatalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        },
+        "allowPdf": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "expectedCaseRevision",
+        "expectedCatalogRevision",
+        "selection",
+        "allowPdf",
+        "expiresAt"
+      ],
+      "additionalProperties": false
+    },
+    "preview-sensitive-sharing-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "caseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "catalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "content": {
+          "$ref": "#/$defs/content"
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        },
+        "allowPdf": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "acknowledgedMutationId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "caseId",
+        "caseRevision",
+        "catalogRevision",
+        "content",
+        "selection",
+        "allowPdf",
+        "expiresAt",
+        "sourceHash",
+        "acknowledgedMutationId"
+      ],
+      "additionalProperties": false
+    },
+    "publish-sensitive-sharing-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCatalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        },
+        "allowPdf": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "previewHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "mutationId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "expectedCaseRevision",
+        "expectedCatalogRevision",
+        "selection",
+        "allowPdf",
+        "expiresAt",
+        "previewHash",
+        "mutationId"
+      ],
+      "additionalProperties": false
+    },
+    "publish-sensitive-sharing-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "caseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "catalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "content": {
+          "$ref": "#/$defs/content"
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        },
+        "allowPdf": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "acknowledgedMutationId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "caseId",
+        "caseRevision",
+        "catalogRevision",
+        "content",
+        "selection",
+        "allowPdf",
+        "expiresAt",
+        "sourceHash",
+        "acknowledgedMutationId"
+      ],
+      "additionalProperties": false
+    },
+    "preview-sensitive-report-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCatalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        },
+        "allowPdf": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "previewHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "expectedCaseRevision",
+        "expectedCatalogRevision",
+        "selection",
+        "allowPdf",
+        "expiresAt",
+        "previewHash"
+      ],
+      "additionalProperties": false
+    },
+    "preview-sensitive-report-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "report": {
+          "type": "object",
+          "properties": {
+            "pdfBase64": {
+              "type": "string",
+              "maxLength": 2796204
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "pageCount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            }
+          },
+          "required": [
+            "pdfBase64",
+            "sha256",
+            "pageCount"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "sourceHash",
+        "report"
+      ],
+      "additionalProperties": false
+    },
+    "read-sensitive-report-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "sourceHash"
+      ],
+      "additionalProperties": false
+    },
+    "read-sensitive-report-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "report": {
+          "type": "object",
+          "properties": {
+            "pdfBase64": {
+              "type": "string",
+              "maxLength": 2796204
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "pageCount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            }
+          },
+          "required": [
+            "pdfBase64",
+            "sha256",
+            "pageCount"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "sourceHash",
+        "report"
+      ],
+      "additionalProperties": false
+    },
+    "preview-sensitive-photo-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedCatalogRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidenceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "expectedEvidenceRevision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "expectedCaseRevision",
+        "expectedCatalogRevision",
+        "evidenceId",
+        "expectedEvidenceRevision"
+      ],
+      "additionalProperties": false
+    },
+    "preview-sensitive-photo-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "descriptor": {
+          "$ref": "#/$defs/photo"
+        },
+        "photoBase64": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 11184812
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "descriptor",
+        "photoBase64"
+      ],
+      "additionalProperties": false
+    },
+    "read-sensitive-photo-request": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "pattern": "^[a-f0-9-]{36}$"
+        },
+        "expectedPermissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sourceHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "evidenceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "expectedEvidenceRevision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "expectedPermissionRevision",
+        "sourceHash",
+        "evidenceId",
+        "expectedEvidenceRevision"
+      ],
+      "additionalProperties": false
+    },
+    "read-sensitive-photo-response": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "membershipId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "permissionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "descriptor": {
+          "$ref": "#/$defs/photo"
+        },
+        "photoBase64": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 11184812
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "membershipId",
+        "permissionRevision",
+        "descriptor",
+        "photoBase64"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
