@@ -1,0 +1,31 @@
+group = 'org.safeathome.homi_local_llm'
+version = '0.0.1'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+def trial = project.findProperty('homiLlamaTrial') == 'true' || System.getenv('HOMI_LLAMA_TRIAL') == '1'
+android {
+    namespace = 'org.safeathome.homi_local_llm'
+    compileSdk = 36
+    ndkVersion = '28.2.13676358'
+    buildFeatures { buildConfig = true }
+    defaultConfig {
+        minSdk = trial ? 28 : 24
+        buildConfigField 'boolean', 'HOMI_LLAMA_TRIAL', trial ? 'true' : 'false'
+        if (trial) {
+            ndk { abiFilters 'arm64-v8a' }
+            externalNativeBuild {
+                cmake {
+                    arguments '-DHOMI_LLAMA_TRIAL=ON',
+                        "-DHOMI_LLAMA_SOURCE_DIR=${projectDir}/../../../build/homi-local-llm/source",
+                        '-DGGML_METAL=OFF', '-DGGML_BLAS=OFF', '-DANDROID_PLATFORM=android-28'
+                    cppFlags '-std=c++17'
+                }
+            }
+        }
+    }
+    if (trial) {
+        externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.22.1' } }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    kotlinOptions { jvmTarget = '17' }
+}
