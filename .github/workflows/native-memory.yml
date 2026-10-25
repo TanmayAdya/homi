@@ -1,0 +1,53 @@
+name: Native AMD64 memory acceptance
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Boundary scenarios, longer sessions, or both
+        type: choice
+        required: true
+        default: all
+        options:
+          - all
+          - boundary
+          - long
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-amd64-memory-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  memory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: backend
+        shell: bash
+    steps:
+      - name: Check out source without retained credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24.22.0
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Measure isolated native AMD64 containers
+        env:
+          SAH_MEMORY_MODE: ${{ inputs.mode }}
+        run: node tool/profile-native-amd64.ts --mode "$SAH_MEMORY_MODE"
+      - name: Retain aggregate measurements for one day
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-amd64-memory-${{ github.run_id }}
+          path: backend/local-artifacts/native-amd64-*.json
+          if-no-files-found: warn
+          retention-days: 1
