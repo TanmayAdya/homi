@@ -1,0 +1,3 @@
+third_party/pdfrx/** -text whitespace=cr-at-eol
+third_party/pdfrx/assets/pdfium_client.js whitespace=cr-at-eol,-blank-at-eol
+third_party/pdfrx/assets/pdfium_worker.js whitespace=cr-at-eol,-blank-at-eol
