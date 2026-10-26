@@ -1,0 +1,73 @@
+const journeyTranslations = <String, Map<String, String>>{
+  '{city} home plan': {
+    'es': 'Plan del hogar en {city}',
+    'zh-Hans': '{city} 居家计划',
+    'zh-Hant': '{city} 居家計畫',
+    'vi': 'Kế hoạch nhà ở tại {city}',
+    'fil': 'Plano ng tahanan sa {city}',
+  },
+  'Reference {reference}': {
+    'es': 'Referencia {reference}',
+    'zh-Hans': '编号 {reference}',
+    'zh-Hant': '編號 {reference}',
+    'vi': 'Mã tham chiếu {reference}',
+    'fil': 'Sanggunian {reference}',
+  },
+  'Add what you know about the resident and their home.': {
+    'es': 'Añada lo que sepa de la persona residente y su hogar.',
+    'zh-Hans': '填写您了解的住户及其住所信息。',
+    'zh-Hant': '填寫您了解的住戶及其住所資訊。',
+    'vi': 'Thêm thông tin bạn biết về cư dân và ngôi nhà của họ.',
+    'fil': 'Ilagay ang alam mo tungkol sa residente at sa kanilang tahanan.',
+  },
+  'Choose an area and describe what feels difficult.': {
+    'es': 'Elija un área y describa qué resulta difícil.',
+    'zh-Hans': '选择一个区域，描述遇到的困难。',
+    'zh-Hant': '選擇一個區域，描述遇到的困難。',
+    'vi': 'Chọn khu vực và mô tả điều gây khó khăn.',
+    'fil': 'Pumili ng lugar at ilarawan kung ano ang mahirap gawin.',
+  },
+  'Improvements and assistance': {
+    'es': 'Mejoras y ayuda',
+    'zh-Hans': '改善措施与援助',
+    'zh-Hant': '改善措施與協助',
+    'vi': 'Cải thiện và hỗ trợ',
+    'fil': 'Mga pagpapabuti at tulong',
+  },
+  'Review possible changes and explore help with them.': {
+    'es': 'Revise posibles cambios y explore cómo obtener ayuda.',
+    'zh-Hans': '查看可行的改进，并了解相关援助。',
+    'zh-Hant': '查看可行的改善，並了解相關協助。',
+    'vi': 'Xem các thay đổi có thể thực hiện và tìm sự hỗ trợ.',
+    'fil':
+        'Suriin ang mga posibleng pagbabago at alamin ang tulong na makukuha.',
+  },
+  'Step {number} of 3. Next step. {title}. {description}': {
+    'es': 'Paso {number} de 3. Siguiente paso. {title}. {description}',
+    'zh-Hans': '第 {number} 步，共 3 步。下一步。{title}。{description}',
+    'zh-Hant': '第 {number} 步，共 3 步。下一步。{title}。{description}',
+    'vi': 'Bước {number} trên 3. Bước tiếp theo. {title}. {description}',
+    'fil': 'Hakbang {number} sa 3. Susunod na hakbang. {title}. {description}',
+  },
+  'Step {number} of 3. {title}. {description}': {
+    'es': 'Paso {number} de 3. {title}. {description}',
+    'zh-Hans': '第 {number} 步，共 3 步。{title}。{description}',
+    'zh-Hant': '第 {number} 步，共 3 步。{title}。{description}',
+    'vi': 'Bước {number} trên 3. {title}. {description}',
+    'fil': 'Hakbang {number} sa 3. {title}. {description}',
+  },
+  'Step {number} · Next step': {
+    'es': 'Paso {number} · Siguiente paso',
+    'zh-Hans': '第 {number} 步 · 下一步',
+    'zh-Hant': '第 {number} 步 · 下一步',
+    'vi': 'Bước {number} · Bước tiếp theo',
+    'fil': 'Hakbang {number} · Susunod na hakbang',
+  },
+  'Step {number}': {
+    'es': 'Paso {number}',
+    'zh-Hans': '第 {number} 步',
+    'zh-Hant': '第 {number} 步',
+    'vi': 'Bước {number}',
+    'fil': 'Hakbang {number}',
+  },
+};
