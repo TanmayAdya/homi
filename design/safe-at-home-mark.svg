@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
+  <title id="title">Safe at Home house mark</title>
+  <path fill="#174E49" d="M0 0H1024V1024H0Z"/>
+  <path fill="#F8F5EE" d="M512 210 C500 210 490 214 481 222 L230 431 C218 441 211 455 211 470 C211 492 230 511 252 511 L276 511 L276 753 C276 786 303 813 336 813 L688 813 C721 813 748 786 748 753 L748 511 L772 511 C794 511 813 492 813 470 C813 455 806 441 794 431 L543 222 C534 214 524 210 512 210 Z"/>
+  <path fill="#174E49" d="M422 813 L422 649 C422 599 462 559 512 559 C562 559 602 599 602 649 L602 813 Z"/>
+</svg>
