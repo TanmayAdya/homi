@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/case-read-request.schema.json",
+  "title": "Current case read request v1",
+  "description": "POST /v1/read-case with a bearer session to reload the authorized current CaseSnapshot, including after an uncertain form-answer save. No expected revision or caller-supplied owner is accepted. Unicode-aware regex matching is required.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+    }
+  }
+}

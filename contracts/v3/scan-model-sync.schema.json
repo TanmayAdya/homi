@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safeathome.local/contracts/v3/scan-model-sync.schema.json",
+  "title": "Owner-only per-room model synchronization",
+  "description": "reviewJson is the original UTF-8 JSON string validated by the strict scene/review parsers. It preserves native coordinate fingerprints. No raw images/archives or sharing permissions are represented.",
+  "$defs": {
+    "read": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "roomId"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "roomId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "save": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "roomId",
+        "expectedCaseRevision",
+        "expectedModelRevision",
+        "mutationId",
+        "reviewJson"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "roomId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expectedCaseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expectedModelRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mutationId": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "reviewJson": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 786432,
+              "contentMediaType": "application/json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "roomId",
+        "caseRevision",
+        "modelRevision",
+        "reviewJson",
+        "reviewSha256",
+        "updatedAt",
+        "updatedBy",
+        "acknowledgedMutationId"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "roomId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "caseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "modelRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewJson": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 786432,
+              "contentMediaType": "application/json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewSha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updatedAt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updatedBy": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "acknowledgedMutationId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/read"
+    },
+    {
+      "$ref": "#/$defs/save"
+    },
+    {
+      "$ref": "#/$defs/state"
+    }
+  ]
+}

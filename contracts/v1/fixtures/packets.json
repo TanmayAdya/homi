@@ -1,0 +1,155 @@
+[
+  {
+    "scenarioId": "matched",
+    "packet": {
+      "schemaVersion": "1",
+      "packetId": "demo-packet-matched",
+      "caseId": "demo-case-matched",
+      "caseRevision": 1,
+      "programId": "demo-home-support",
+      "ruleVersion": "demo-v1",
+      "formVersion": null,
+      "mappingVersion": null,
+      "status": "draft",
+      "isDemo": true,
+      "generatedAt": "2026-10-13T19:00:00Z",
+      "recheckAfter": "2026-10-14T19:00:00Z",
+      "storageReference": null,
+      "attachments": [],
+      "missingItems": [
+        {
+          "id": "official-form",
+          "description": "Confirm the current official application form and its version with the program.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "field-mapping",
+          "description": "Confirm which information belongs in each field before preparing the official form.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "intake-route",
+          "description": "Verify the current intake route and submission instructions with the program.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "program-availability",
+          "description": "Confirm whether the program is currently accepting requests.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "evidence:demo-finding-entrance",
+          "description": "Review the evidence for the entrance finding and confirm which files may be included.",
+          "resolvedBy": "resident"
+        }
+      ]
+    }
+  },
+  {
+    "scenarioId": "not-matched",
+    "packet": {
+      "schemaVersion": "1",
+      "packetId": "demo-packet-not-matched",
+      "caseId": "demo-case-not-matched",
+      "caseRevision": 1,
+      "programId": "demo-home-support",
+      "ruleVersion": "demo-v1",
+      "formVersion": null,
+      "mappingVersion": null,
+      "status": "draft",
+      "isDemo": true,
+      "generatedAt": "2026-10-13T19:00:00Z",
+      "recheckAfter": "2026-10-14T19:00:00Z",
+      "storageReference": null,
+      "attachments": [],
+      "missingItems": [
+        {
+          "id": "official-form",
+          "description": "Confirm the current official application form and its version with the program.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "field-mapping",
+          "description": "Confirm which information belongs in each field before preparing the official form.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "intake-route",
+          "description": "Verify the current intake route and submission instructions with the program.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "program-availability",
+          "description": "Confirm whether the program is currently accepting requests.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "check:plan",
+          "description": "Ask the program to identify who can resolve this requirement: The fictional plan does not match the example route.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "evidence:demo-finding-entrance",
+          "description": "Review the evidence for the entrance finding and confirm which files may be included.",
+          "resolvedBy": "resident"
+        }
+      ]
+    }
+  },
+  {
+    "scenarioId": "unknown",
+    "packet": {
+      "schemaVersion": "1",
+      "packetId": "demo-packet-unknown",
+      "caseId": "demo-case-unknown",
+      "caseRevision": 1,
+      "programId": "demo-home-support",
+      "ruleVersion": "demo-v1",
+      "formVersion": null,
+      "mappingVersion": null,
+      "status": "draft",
+      "isDemo": true,
+      "generatedAt": "2026-10-13T19:00:00Z",
+      "recheckAfter": "2026-10-14T19:00:00Z",
+      "storageReference": null,
+      "attachments": [],
+      "missingItems": [
+        {
+          "id": "official-form",
+          "description": "Confirm the current official application form and its version with the program.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "field-mapping",
+          "description": "Confirm which information belongs in each field before preparing the official form.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "intake-route",
+          "description": "Verify the current intake route and submission instructions with the program.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "program-availability",
+          "description": "Confirm whether the program is currently accepting requests.",
+          "resolvedBy": "program"
+        },
+        {
+          "id": "check:plan",
+          "description": "Confirm the unresolved requirement: The plan answer is missing. Ask the resident to confirm it.",
+          "resolvedBy": "resident"
+        },
+        {
+          "id": "answer:profile.healthPlan",
+          "description": "Review and resolve the conflicting or unconfirmed health plan answer.",
+          "resolvedBy": "resident"
+        },
+        {
+          "id": "evidence:demo-finding-entrance",
+          "description": "Review the evidence for the entrance finding and confirm which files may be included.",
+          "resolvedBy": "resident"
+        }
+      ]
+    }
+  }
+]

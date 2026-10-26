@@ -1,0 +1,298 @@
+[
+  {
+    "route": "read-collaboration",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 3
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "fictional-shared-case",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "caseRevision": 1,
+      "permissionRevision": 3,
+      "progressRevision": 2,
+      "collaborationRevision": 1,
+      "canManage": false,
+      "scope": {
+        "taskIds": [
+          "assigned-task"
+        ],
+        "allowTaskProgress": true,
+        "allowStatusProposals": true
+      },
+      "tasks": [
+        {
+          "id": "assigned-task",
+          "programId": "fictional-program",
+          "findingId": "fictional-finding",
+          "title": "Fictional selected task",
+          "kind": "room_review",
+          "state": "pending",
+          "responsiblePerson": "Family label only",
+          "dueOn": null,
+          "revision": 1,
+          "assigneeUserId": "33333333-3333-4333-8333-333333333333",
+          "needsReview": false
+        }
+      ],
+      "proposals": [],
+      "acknowledgedMutationId": null
+    }
+  },
+  {
+    "route": "configure-collaboration",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 2,
+      "expectedCaseRevision": 1,
+      "expectedCollaborationRevision": 0,
+      "mutationId": "44444444-4444-4444-8444-444444444444",
+      "expectedProgressRevision": 2,
+      "collaborationScope": {
+        "taskIds": [
+          "assigned-task"
+        ],
+        "allowTaskProgress": true,
+        "allowStatusProposals": true
+      },
+      "assignedTaskIds": [
+        "assigned-task"
+      ]
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "fictional-shared-case",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "caseRevision": 1,
+      "permissionRevision": 3,
+      "progressRevision": 2,
+      "collaborationRevision": 1,
+      "canManage": true,
+      "scope": {
+        "taskIds": [
+          "assigned-task"
+        ],
+        "allowTaskProgress": true,
+        "allowStatusProposals": true
+      },
+      "tasks": [
+        {
+          "id": "assigned-task",
+          "programId": "fictional-program",
+          "findingId": "fictional-finding",
+          "title": "Fictional selected task",
+          "kind": "room_review",
+          "state": "pending",
+          "responsiblePerson": "Family label only",
+          "dueOn": null,
+          "revision": 1,
+          "assigneeUserId": "33333333-3333-4333-8333-333333333333",
+          "needsReview": false
+        }
+      ],
+      "proposals": [],
+      "acknowledgedMutationId": "44444444-4444-4444-8444-444444444444"
+    }
+  },
+  {
+    "route": "update-shared-task",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 3,
+      "expectedCaseRevision": 1,
+      "expectedCollaborationRevision": 1,
+      "mutationId": "44444444-4444-4444-8444-444444444444",
+      "taskId": "assigned-task",
+      "expectedTaskRevision": 1,
+      "state": "completed"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "fictional-shared-case",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "caseRevision": 1,
+      "permissionRevision": 3,
+      "progressRevision": 3,
+      "collaborationRevision": 2,
+      "canManage": false,
+      "scope": {
+        "taskIds": [
+          "assigned-task"
+        ],
+        "allowTaskProgress": true,
+        "allowStatusProposals": true
+      },
+      "tasks": [
+        {
+          "id": "assigned-task",
+          "programId": "fictional-program",
+          "findingId": "fictional-finding",
+          "title": "Fictional selected task",
+          "kind": "room_review",
+          "state": "completed",
+          "responsiblePerson": "Family label only",
+          "dueOn": null,
+          "revision": 2,
+          "assigneeUserId": "33333333-3333-4333-8333-333333333333",
+          "needsReview": false
+        }
+      ],
+      "proposals": [],
+      "acknowledgedMutationId": "44444444-4444-4444-8444-444444444444"
+    }
+  },
+  {
+    "route": "propose-shared-status",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 3,
+      "expectedCaseRevision": 1,
+      "expectedCollaborationRevision": 1,
+      "mutationId": "44444444-4444-4444-8444-444444444444",
+      "programId": "fictional-program",
+      "update": {
+        "updateId": "55555555-5555-4555-8555-555555555555",
+        "status": "submitted",
+        "occurredOn": "2026-10-24",
+        "source": "self_report",
+        "note": "Fictional proposal only",
+        "nextAction": null,
+        "responsibleParty": null,
+        "followUpOn": null
+      }
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "fictional-shared-case",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "caseRevision": 1,
+      "permissionRevision": 3,
+      "progressRevision": 2,
+      "collaborationRevision": 2,
+      "canManage": false,
+      "scope": {
+        "taskIds": [
+          "assigned-task"
+        ],
+        "allowTaskProgress": true,
+        "allowStatusProposals": true
+      },
+      "tasks": [
+        {
+          "id": "assigned-task",
+          "programId": "fictional-program",
+          "findingId": "fictional-finding",
+          "title": "Fictional selected task",
+          "kind": "room_review",
+          "state": "pending",
+          "responsiblePerson": "Family label only",
+          "dueOn": null,
+          "revision": 1,
+          "assigneeUserId": "33333333-3333-4333-8333-333333333333",
+          "needsReview": false
+        }
+      ],
+      "proposals": [
+        {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "membershipId": "11111111-1111-4111-8111-111111111111",
+          "permissionRevision": 3,
+          "caseRevision": 1,
+          "programId": "fictional-program",
+          "update": {
+            "updateId": "55555555-5555-4555-8555-555555555555",
+            "status": "submitted",
+            "occurredOn": "2026-10-24",
+            "source": "self_report",
+            "note": "Fictional proposal only",
+            "nextAction": null,
+            "responsibleParty": null,
+            "followUpOn": null
+          },
+          "proposedBy": "33333333-3333-4333-8333-333333333333",
+          "proposedAt": "2026-10-24T18:00:00.000Z",
+          "state": "pending",
+          "reviewedBy": null,
+          "reviewedAt": null
+        }
+      ],
+      "acknowledgedMutationId": "44444444-4444-4444-8444-444444444444"
+    }
+  },
+  {
+    "route": "review-shared-status",
+    "request": {
+      "schemaVersion": "3",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "expectedPermissionRevision": 3,
+      "expectedCaseRevision": 1,
+      "expectedCollaborationRevision": 2,
+      "mutationId": "44444444-4444-4444-8444-444444444444",
+      "expectedProgressRevision": 2,
+      "proposalId": "44444444-4444-4444-8444-444444444444",
+      "decision": "accepted"
+    },
+    "response": {
+      "schemaVersion": "3",
+      "caseId": "fictional-shared-case",
+      "membershipId": "11111111-1111-4111-8111-111111111111",
+      "caseRevision": 1,
+      "permissionRevision": 3,
+      "progressRevision": 3,
+      "collaborationRevision": 3,
+      "canManage": true,
+      "scope": {
+        "taskIds": [
+          "assigned-task"
+        ],
+        "allowTaskProgress": true,
+        "allowStatusProposals": true
+      },
+      "tasks": [
+        {
+          "id": "assigned-task",
+          "programId": "fictional-program",
+          "findingId": "fictional-finding",
+          "title": "Fictional selected task",
+          "kind": "room_review",
+          "state": "pending",
+          "responsiblePerson": "Family label only",
+          "dueOn": null,
+          "revision": 1,
+          "assigneeUserId": "33333333-3333-4333-8333-333333333333",
+          "needsReview": false
+        }
+      ],
+      "proposals": [
+        {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "membershipId": "11111111-1111-4111-8111-111111111111",
+          "permissionRevision": 3,
+          "caseRevision": 1,
+          "programId": "fictional-program",
+          "update": {
+            "updateId": "55555555-5555-4555-8555-555555555555",
+            "status": "submitted",
+            "occurredOn": "2026-10-24",
+            "source": "self_report",
+            "note": "Fictional proposal only",
+            "nextAction": null,
+            "responsibleParty": null,
+            "followUpOn": null
+          },
+          "proposedBy": "33333333-3333-4333-8333-333333333333",
+          "proposedAt": "2026-10-24T18:00:00.000Z",
+          "state": "accepted",
+          "reviewedBy": "fictional-owner",
+          "reviewedAt": "2026-10-24T19:00:00.000Z"
+        }
+      ],
+      "acknowledgedMutationId": "44444444-4444-4444-8444-444444444444"
+    }
+  }
+]

@@ -1,0 +1,227 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "caseRevision",
+    "definition",
+    "saved",
+    "isCurrent"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2"
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "caseRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "programId",
+        "questionnaireVersion",
+        "questions"
+      ],
+      "properties": {
+        "programId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "questionnaireVersion": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "questions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "label",
+              "kind",
+              "maxLength",
+              "description"
+            ],
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "kind": {
+                "enum": [
+                  "boolean",
+                  "money",
+                  "text"
+                ]
+              },
+              "maxLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 600
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            }
+          }
+        }
+      }
+    },
+    "saved": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion",
+            "caseId",
+            "caseRevision",
+            "programId",
+            "questionnaireVersion",
+            "intakeRevision",
+            "updatedAt",
+            "updatedBy",
+            "answers"
+          ],
+          "properties": {
+            "schemaVersion": {
+              "const": "2"
+            },
+            "caseId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "caseRevision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "programId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "questionnaireVersion": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$",
+              "minLength": 64,
+              "maxLength": 64
+            },
+            "intakeRevision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedBy": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "answers": {
+              "type": "array",
+              "maxItems": 20,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "key",
+                  "value",
+                  "reviewState"
+                ],
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean",
+                      "null"
+                    ],
+                    "maxLength": 600,
+                    "minimum": 0,
+                    "maximum": 100000000
+                  },
+                  "reviewState": {
+                    "enum": [
+                      "reported",
+                      "unknown"
+                    ]
+                  }
+                },
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "value": {
+                          "type": "null"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "reviewState": {
+                          "const": "unknown"
+                        }
+                      }
+                    },
+                    "else": {
+                      "properties": {
+                        "reviewState": {
+                          "const": "reported"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "isCurrent": {
+      "type": "boolean"
+    }
+  },
+  "description": "Runtime additionally enforces question-specific types, unique keys, owner identity, exact revision binding, timestamp shape and questionnaire hashes. Reports are never clinical verification or consent.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v2/program-intake.schema.json"
+}

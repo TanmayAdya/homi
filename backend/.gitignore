@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+local-artifacts/
+supabase-database-password.txt
+.env*
+!.env.example
+!.env.migration.example
+!.env.sessions.example
+!.env.hosted.example
+!.env.deletion.example
+*.pem
+*.key
+local-postgres/

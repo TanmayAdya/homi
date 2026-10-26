@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/packet.schema.json",
+  "title": "Draft packet v1",
+  "description": "Draft-preparation output only. No submission or approval is implied. Verified form adapters may provide form/mapping versions; the checklist service still returns null storage and no attachments until authorized artifact/evidence adapters are implemented. Storage references are private object identifiers, never public URLs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "packetId", "caseId", "caseRevision", "programId", "ruleVersion", "formVersion", "mappingVersion", "status", "isDemo", "generatedAt", "recheckAfter", "storageReference", "attachments", "missingItems"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "packetId": {"$ref": "#/$defs/text"},
+    "caseId": {"$ref": "#/$defs/text"},
+    "caseRevision": {"type": "integer", "minimum": 1},
+    "programId": {"$ref": "#/$defs/text"},
+    "ruleVersion": {"$ref": "#/$defs/text"},
+    "formVersion": {"type": ["string", "null"], "minLength": 1},
+    "mappingVersion": {"type": ["string", "null"], "minLength": 1},
+    "status": {"const": "draft"},
+    "isDemo": {"type": "boolean"},
+    "generatedAt": {"$ref": "#/$defs/instant"},
+    "recheckAfter": {"type": ["string", "null"], "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"},
+    "storageReference": {"type": ["string", "null"], "minLength": 1},
+    "attachments": {"type": "array", "items": {"$ref": "#/$defs/attachment"}},
+    "missingItems": {"type": "array", "items": {"$ref": "#/$defs/missingItem"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "instant": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"},
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceId", "findingId", "storageReference"],
+      "properties": {
+        "evidenceId": {"$ref": "#/$defs/text"},
+        "findingId": {"$ref": "#/$defs/text"},
+        "storageReference": {"$ref": "#/$defs/text"}
+      }
+    },
+    "missingItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "resolvedBy"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"},
+        "description": {"$ref": "#/$defs/text"},
+        "resolvedBy": {"enum": ["resident", "program", "professional"]}
+      }
+    }
+  }
+}

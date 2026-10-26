@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1",
+  "sourceUrl": "https://www.hpsm.org/docs/default-source/provider-forms/community-supports-referral-form.pdf?sfvrsn=9b37cc61_20",
+  "sourceSha256": "b64496cb1f0bd68f1dabcdb8b900b2e3179b68990399c75dd0fd5d22ec2616c8",
+  "reviewedOn": "2026-10-22",
+  "sourcePages": 6,
+  "derivative": "hpsm-eaa-inert.pdf",
+  "derivativeSha256": "506b6606e3734a2c352a48a67eed28e250e9c369be10e38b52c699e86abbb0d0",
+  "transformations": [
+    "Clear every original input",
+    "Remove Save for Email and Print for Fax utility controls",
+    "Flatten blank original fields into six preserved page backgrounds",
+    "Copy page contents into a fresh document without action/name trees",
+    "Add only ten independently mapped administrative text fields and EAA route checkbox 5"
+  ],
+  "limitations": [
+    "Clinical criteria, consent, attestation, signatures and plan decisions remain blank.",
+    "Preparation derivative; confirm current accepted submission format with HPSM before use."
+  ]
+}

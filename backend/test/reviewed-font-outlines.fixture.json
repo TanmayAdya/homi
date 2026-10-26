@@ -1,0 +1,171 @@
+{
+  "sourceSha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+  "sourceParser": "FontTools 4.61.1 RecordingPen; canonical M/L/C/Z coordinates rounded to 0.01",
+  "glyphs": [
+    {
+      "codepoint": 38472,
+      "character": "陈",
+      "svgSha256": "0b6eff07febe9f1e25800a8556331b98c3f5f3eb012d0a2a5d7fa05d4bdf06cd"
+    },
+    {
+      "codepoint": 32654,
+      "character": "美",
+      "svgSha256": "ab325850bfb4e5da165e8ed5c32c74676b7cc872c2c43e356b330c71fcaa72aa"
+    },
+    {
+      "codepoint": 21326,
+      "character": "华",
+      "svgSha256": "f317b095fdc4c259ad522012afb83010408e227ea158fb17b122dbf3a0d4ef5d"
+    },
+    {
+      "codepoint": 38515,
+      "character": "陳",
+      "svgSha256": "34e88d8c6f4d422a20099286659cbb48ba4f6e3bad388535a7c77395af086193"
+    },
+    {
+      "codepoint": 33775,
+      "character": "華",
+      "svgSha256": "4dd8d4dac581bfd81dd28d75f278a534c5ab44df82dad7c4c6c2a1814de77690"
+    },
+    {
+      "codepoint": 32321,
+      "character": "繁",
+      "svgSha256": "48782c9005e333d4c9086965914b8c0bf22d5d13f6d3541c74949414f9423dc9"
+    },
+    {
+      "codepoint": 35079,
+      "character": "複",
+      "svgSha256": "d8ae306f83ad13e1152c294d4d7afc5653f8a180e0b142b8c55deab877f34be4"
+    },
+    {
+      "codepoint": 134071,
+      "character": "𠮷",
+      "svgSha256": "f70b4235062d6da025298bdaa7dccc576e47a5c0aeef06f62198861f8f120192"
+    },
+    {
+      "codepoint": 20800,
+      "character": "兀",
+      "svgSha256": "faccc64e7d6aeebd6bfd3b12f2dbc2f423328fe6486787247cca4d22a0593376"
+    },
+    {
+      "codepoint": 64012,
+      "character": "兀",
+      "svgSha256": "faccc64e7d6aeebd6bfd3b12f2dbc2f423328fe6486787247cca4d22a0593376"
+    },
+    {
+      "codepoint": 65,
+      "character": "A",
+      "svgSha256": "f4e3c282f4301c692b03a225e0b4638c8a5d65948c566605c24683bd9c1b7d0e"
+    },
+    {
+      "codepoint": 233,
+      "character": "é",
+      "svgSha256": "1787aa06b7ab6e7c730a8a7b801ff4da441cdc1c0d1f5b53ae4d1a55e864a406"
+    },
+    {
+      "codepoint": 49,
+      "character": "1",
+      "svgSha256": "606a479c23c2b83b999748a02e0a1e01c6358326756b0dc80dec313a9f4341b1"
+    },
+    {
+      "codepoint": 50,
+      "character": "2",
+      "svgSha256": "ecf02bedc823d59720f3176442e1b8467e4bd7ca6dc3bb7f17b0b46727ac8b20"
+    },
+    {
+      "codepoint": 51,
+      "character": "3",
+      "svgSha256": "311c8bc1aca6da5fe78dddc950efc84a3b30c0b7251ce616ae37838c30f80e6e"
+    },
+    {
+      "codepoint": 31616,
+      "character": "简",
+      "svgSha256": "3f2a7ac8b42fa1d5c940121517911c75ce2e45c4259cbb922ad8c43a5b3ad352"
+    },
+    {
+      "codepoint": 20307,
+      "character": "体",
+      "svgSha256": "1d0d87c24165c8f60fbfc4ebd3aa0b75e00e3a452853c892769777658b3b345e"
+    },
+    {
+      "codepoint": 20013,
+      "character": "中",
+      "svgSha256": "3fd49a15aefd9e78da87751bfa80b220a49f0ededd7219dd758b70880cb68c17"
+    },
+    {
+      "codepoint": 25991,
+      "character": "文",
+      "svgSha256": "449578437586fde336e7136712d3fb707dbdf6a200de62eadb5824cd54f8db87"
+    },
+    {
+      "codepoint": 39636,
+      "character": "體",
+      "svgSha256": "e09e4a5cf5428339806e1489ff214c475de7c25ce95d626a4ebe9b27fc7a67d1"
+    },
+    {
+      "codepoint": 33,
+      "character": "!",
+      "svgSha256": "1dc82cea3de17a369ddb9ccbab6aa171faf1bf4dc0bd4381eb8e5582bbe7a613"
+    },
+    {
+      "codepoint": 167,
+      "character": "§",
+      "svgSha256": "892a087e4d43b9d7e478e503c477e77438e600d8ebb48f9bb0857a7bab6e632f"
+    },
+    {
+      "codepoint": 4352,
+      "character": "ᄀ",
+      "svgSha256": "6f6531fab5072bec0a953e9ba71389f18b10cbb4b2bf030c7fe772de6bc8fa41"
+    },
+    {
+      "codepoint": 8194,
+      "character": " ",
+      "svgSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "codepoint": 8544,
+      "character": "Ⅰ",
+      "svgSha256": "6dab57cdc9370f3835554d81ab7aacdb10418682cf2b9fe16f24970f0697b64b"
+    },
+    {
+      "codepoint": 9352,
+      "character": "⒈",
+      "svgSha256": "334144da6a0f90b0b818c93d4f8f3c93ae4301441672711fc36892790ae8f9cc"
+    },
+    {
+      "codepoint": 9472,
+      "character": "─",
+      "svgSha256": "f611879254392f476c76640a64b8f92397b215de6c269353181159918b344a7e"
+    },
+    {
+      "codepoint": 11904,
+      "character": "⺀",
+      "svgSha256": "7dd0d582f75151a487d419cd604645e9f7b727e568fbc490a97923ce674e59d0"
+    },
+    {
+      "codepoint": 12353,
+      "character": "ぁ",
+      "svgSha256": "4df5c5fa952135f40a3a1264b7423f9831871f2103879776e6d773057b5cc105"
+    },
+    {
+      "codepoint": 12549,
+      "character": "ㄅ",
+      "svgSha256": "4e3e7538c8ee8e101187d1645d41e9a39ae8972a75d16826749609faf23e635b"
+    },
+    {
+      "codepoint": 65313,
+      "character": "Ａ",
+      "svgSha256": "32cd0a335a1d6ba83565fbc4c9409b7d700d99f82dd70524a52510da30c2929a"
+    },
+    {
+      "codepoint": 65377,
+      "character": "｡",
+      "svgSha256": "dc504f098708d90ef4e6e8643a5c15e31812d0d58b837058f207c497deb1c32e"
+    },
+    {
+      "codepoint": 65513,
+      "character": "￩",
+      "svgSha256": "917b718c34e9dd2639f1469967aff5494f4fff584693e50836d865e1bffdfb8a"
+    }
+  ]
+}

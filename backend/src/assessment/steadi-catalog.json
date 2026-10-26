@@ -1,0 +1,24 @@
+{
+  "version": "sah-steadi-home-2017-v1",
+  "sourceUrl": "https://www.cdc.gov/steadi/pdf/steadi-brochure-checkforsafety-508.pdf",
+  "sourceTitle": "CDC STEADI — Check for Safety (2017)",
+  "reviewedOn": "2026-10-24",
+  "questions": [
+    {"id":"stairs.clutter","section":"STAIRS & STEPS","rooms":["stairs","entrance","outdoorPaths"],"prompt":"Are stairs cluttered?","concernWhen":"yes","guidance":"Clear the steps."},
+    {"id":"stairs.surface","section":"STAIRS & STEPS","rooms":["stairs","entrance","outdoorPaths"],"prompt":"Are steps damaged or uneven?","concernWhen":"yes","guidance":"Arrange step repairs."},
+    {"id":"stairs.lighting","section":"STAIRS & STEPS","rooms":["stairs","entrance","outdoorPaths"],"prompt":"Can you switch lights at both stair ends?","concernWhen":"no","guidance":"Ask an electrician about lighting."},
+    {"id":"stairs.bulb","section":"STAIRS & STEPS","rooms":["stairs","entrance","outdoorPaths"],"prompt":"Is a stair bulb out?","concernWhen":"yes","guidance":"Ask someone to replace it."},
+    {"id":"stairs.carpet","section":"STAIRS & STEPS","rooms":["stairs","entrance","outdoorPaths"],"prompt":"Is stair carpeting insecure?","concernWhen":"yes","guidance":"Arrange secure carpeting or nonslip treads."},
+    {"id":"stairs.rails","section":"STAIRS & STEPS","rooms":["stairs","entrance","outdoorPaths"],"prompt":"Do both sides have secure, full-length rails?","concernWhen":"no","guidance":"Arrange suitable handrails."},
+    {"id":"floors.furniture","section":"FLOORS","rooms":["bathroom","entrance","livingSpaces","bedroom","kitchen"],"prompt":"Does furniture obstruct walking?","concernWhen":"yes","guidance":"Ask for a clearer route."},
+    {"id":"floors.rugs","section":"FLOORS","rooms":["bathroom","entrance","livingSpaces","bedroom","kitchen"],"prompt":"Are there small rugs?","concernWhen":"yes","guidance":"Remove or secure them."},
+    {"id":"floors.clutter","section":"FLOORS","rooms":["bathroom","entrance","livingSpaces","bedroom","kitchen"],"prompt":"Are floors cluttered?","concernWhen":"yes","guidance":"Clear walking routes."},
+    {"id":"floors.cords","section":"FLOORS","rooms":["bathroom","entrance","livingSpaces","bedroom","kitchen"],"prompt":"Do cables cross walking routes?","concernWhen":"yes","guidance":"Move cables beside walls."},
+    {"id":"kitchen.storage","section":"KITCHEN","rooms":["kitchen"],"prompt":"Are everyday items stored high?","concernWhen":"yes","guidance":"Keep them within easy reach."},
+    {"id":"kitchen.stool","section":"KITCHEN","rooms":["kitchen"],"prompt":"Is your step stool stable, with a handhold?","concernWhen":"no","guidance":"Use a suitable stool, never a chair."},
+    {"id":"bedroom.lamp","section":"BEDROOMS","rooms":["bedroom"],"prompt":"Is bedside lighting difficult to reach?","concernWhen":"yes","guidance":"Bring a lamp closer."},
+    {"id":"bedroom.path","section":"BEDROOMS","rooms":["bedroom"],"prompt":"Is the bathroom route dark?","concernWhen":"yes","guidance":"Add night lighting."},
+    {"id":"bathroom.surface","section":"BATHROOMS","rooms":["bathroom"],"prompt":"Is the bathing surface slippery?","concernWhen":"yes","guidance":"Add nonslip protection."},
+    {"id":"bathroom.support","section":"BATHROOMS","rooms":["bathroom"],"prompt":"Is support needed for bathing or toileting?","concernWhen":"yes","guidance":"Ask about installing grab bars."}
+  ]
+}

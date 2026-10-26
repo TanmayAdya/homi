@@ -1,0 +1,661 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v3/home-safety.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "case",
+    "safety",
+    "acknowledgedMutationId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "3"
+    },
+    "case": {
+      "$ref": "../v1/case.schema.json"
+    },
+    "safety": {
+      "$ref": "#/$defs/record"
+    },
+    "acknowledgedMutationId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidenceCatalogRevision": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "$defs": {
+    "room": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "type": {
+          "enum": [
+            "bathroom",
+            "entrance",
+            "stairs",
+            "livingSpaces",
+            "bedroom",
+            "kitchen",
+            "outdoorPaths"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "archived": {
+          "const": true
+        }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "roomId",
+        "questionId",
+        "value",
+        "revision"
+      ],
+      "properties": {
+        "roomId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "questionId": {
+          "enum": [
+            "stairs.clutter",
+            "stairs.surface",
+            "stairs.lighting",
+            "stairs.bulb",
+            "stairs.carpet",
+            "stairs.rails",
+            "floors.furniture",
+            "floors.rugs",
+            "floors.clutter",
+            "floors.cords",
+            "kitchen.storage",
+            "kitchen.stool",
+            "bedroom.lamp",
+            "bedroom.path",
+            "bathroom.surface",
+            "bathroom.support"
+          ]
+        },
+        "value": {
+          "enum": [
+            "yes",
+            "no",
+            "not_sure",
+            "not_applicable",
+            "unanswered"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingId",
+        "roomId",
+        "questionId",
+        "answerRevision"
+      ],
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "roomId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "questionId": {
+          "anyOf": [
+            {
+              "enum": [
+                "stairs.clutter",
+                "stairs.surface",
+                "stairs.lighting",
+                "stairs.bulb",
+                "stairs.carpet",
+                "stairs.rails",
+                "floors.furniture",
+                "floors.rugs",
+                "floors.clutter",
+                "floors.cords",
+                "kitchen.storage",
+                "kitchen.stool",
+                "bedroom.lamp",
+                "bedroom.path",
+                "bathroom.surface",
+                "bathroom.support"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "answerRevision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogVersion",
+        "rooms",
+        "answers",
+        "findingRooms"
+      ],
+      "properties": {
+        "catalogVersion": {
+          "const": "sah-steadi-home-2017-v1"
+        },
+        "rooms": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/room"
+          }
+        },
+        "answers": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "$ref": "#/$defs/answer"
+          }
+        },
+        "findingRooms": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mutationId",
+        "requestHash",
+        "revision",
+        "recordedAt",
+        "recordedBy",
+        "operation",
+        "caseRevision"
+      ],
+      "properties": {
+        "mutationId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "requestHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "recordedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "operation": {
+          "$ref": "#/$defs/operation"
+        },
+        "caseRevision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "caseId",
+        "revision",
+        "document",
+        "history"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "3"
+        },
+        "caseId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500
+        },
+        "document": {
+          "$ref": "#/$defs/document"
+        },
+        "history": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        }
+      }
+    },
+    "operation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "room"
+          ],
+          "properties": {
+            "type": {
+              "const": "add_room"
+            },
+            "room": {
+              "$ref": "#/$defs/room"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "name"
+          ],
+          "properties": {
+            "type": {
+              "const": "rename_room"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 80
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "questionId",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "answer"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "questionId": {
+              "enum": [
+                "stairs.clutter",
+                "stairs.surface",
+                "stairs.lighting",
+                "stairs.bulb",
+                "stairs.carpet",
+                "stairs.rails",
+                "floors.furniture",
+                "floors.rugs",
+                "floors.clutter",
+                "floors.cords",
+                "kitchen.storage",
+                "kitchen.stool",
+                "bedroom.lamp",
+                "bedroom.path",
+                "bathroom.surface",
+                "bathroom.support"
+              ]
+            },
+            "value": {
+              "enum": [
+                "yes",
+                "no",
+                "not_sure",
+                "not_applicable",
+                "unanswered"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "findingId"
+          ],
+          "properties": {
+            "type": {
+              "const": "assign_finding"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "findingId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "questionId",
+            "findingId",
+            "observation",
+            "state"
+          ],
+          "properties": {
+            "type": {
+              "const": "review_concern"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "questionId": {
+              "enum": [
+                "stairs.clutter",
+                "stairs.surface",
+                "stairs.lighting",
+                "stairs.bulb",
+                "stairs.carpet",
+                "stairs.rails",
+                "floors.furniture",
+                "floors.rugs",
+                "floors.clutter",
+                "floors.cords",
+                "kitchen.storage",
+                "kitchen.stool",
+                "bedroom.lamp",
+                "bedroom.path",
+                "bathroom.surface",
+                "bathroom.support"
+              ]
+            },
+            "findingId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "state": {
+              "enum": [
+                "confirmed",
+                "needs_review",
+                "dismissed"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "findingId",
+            "findingFingerprint",
+            "answerRevision",
+            "addressed"
+          ],
+          "properties": {
+            "type": {
+              "const": "set_addressed"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "findingId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "findingFingerprint": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "answerRevision": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "addressed": {
+              "type": "boolean"
+            },
+            "evidenceCatalogRevision": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "questionId",
+            "answerRevision",
+            "note",
+            "expectedCatalogRevision",
+            "evidence"
+          ],
+          "properties": {
+            "type": {
+              "const": "annotate_answer"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "questionId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "answerRevision": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "note": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "expectedCatalogRevision": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "evidence": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "evidenceId",
+                  "expectedEvidenceRevision"
+                ],
+                "properties": {
+                  "evidenceId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "expectedEvidenceRevision": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId"
+          ],
+          "properties": {
+            "type": {
+              "const": "archive_room"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId"
+          ],
+          "properties": {
+            "type": {
+              "const": "restore_room"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "roomId",
+            "expectedModelRevision"
+          ],
+          "properties": {
+            "type": {
+              "const": "delete_room"
+            },
+            "roomId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "expectedModelRevision": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          }
+        }
+      ]
+    }
+  }
+}

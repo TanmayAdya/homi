@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v2/assessment-save-request.schema.json",
+  "title": "Assessment Save Request",
+  "description": "Atomic replacement of strict v1 case plus provenance. Runtime verifies original unit conversion, one original per (findingId,type), matching finding reviews, unique IDs, 12 KiB metadata and 32 KiB request. Exact mutation retries are acknowledged, never guessed from revision alone.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "expectedCaseFingerprint",
+    "expectedCatalogRevision",
+    "expectedAssessmentRevision",
+    "mutationId",
+    "draft",
+    "metadata"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2"
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "expectedCaseRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "expectedCaseFingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "expectedCatalogRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "expectedAssessmentRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 500
+    },
+    "mutationId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,128}$"
+    },
+    "draft": {
+      "$ref": "../v1/case-create-request.schema.json"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurements",
+        "reviews"
+      ],
+      "properties": {
+        "measurements": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "findingId",
+              "type",
+              "originalText",
+              "originalUnit",
+              "decimalSeparator",
+              "source",
+              "recorder",
+              "recordedAt"
+            ],
+            "properties": {
+              "findingId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "originalText": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "originalUnit": {
+                "enum": [
+                  "mm",
+                  "cm",
+                  "m",
+                  "in",
+                  "ft",
+                  null
+                ]
+              },
+              "decimalSeparator": {
+                "enum": [
+                  "point",
+                  "comma",
+                  null
+                ]
+              },
+              "source": {
+                "enum": [
+                  "manual",
+                  "estimated",
+                  "legacy_unknown"
+                ]
+              },
+              "recorder": {
+                "enum": [
+                  "self",
+                  "helper",
+                  "unknown"
+                ]
+              },
+              "recordedAt": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "reviews": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "findingId",
+              "state",
+              "note"
+            ],
+            "properties": {
+              "findingId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "state": {
+                "enum": [
+                  "confirmed",
+                  "needs_review",
+                  "dismissed"
+                ]
+              },
+              "note": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 500
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

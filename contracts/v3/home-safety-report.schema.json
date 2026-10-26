@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "caseRevision",
+    "safetyRevision",
+    "catalogRevision",
+    "includeNotes",
+    "includeEvidenceReferences",
+    "generatedAt",
+    "pageCount",
+    "sha256",
+    "pdfBase64"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "3"
+    },
+    "caseId": {
+      "type": "string"
+    },
+    "caseRevision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "safetyRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "catalogRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "includeNotes": {
+      "type": "boolean"
+    },
+    "includeEvidenceReferences": {
+      "type": "boolean"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "pageCount": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 128
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "pdfBase64": {
+      "type": "string",
+      "maxLength": 2796204,
+      "contentEncoding": "base64"
+    }
+  }
+}

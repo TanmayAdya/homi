@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "expectedCaseRevision",
+    "expectedSafetyRevision",
+    "expectedCatalogRevision",
+    "includeNotes",
+    "includeEvidenceReferences"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "3"
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "expectedCaseRevision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "expectedSafetyRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "expectedCatalogRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "includeNotes": {
+      "type": "boolean"
+    },
+    "includeEvidenceReferences": {
+      "type": "boolean"
+    }
+  }
+}

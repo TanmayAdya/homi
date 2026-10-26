@@ -1,0 +1,610 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:safeathome:v3:program-progress-page",
+  "title": "Private program progress v3 page",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "caseRevision",
+    "revision",
+    "historyVersion",
+    "programs",
+    "tasks",
+    "nextOffset",
+    "acknowledgedMutationId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "3"
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+    },
+    "caseRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 500
+    },
+    "historyVersion": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "programs": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "programId",
+          "name",
+          "trackedAt",
+          "trackedBy",
+          "retired",
+          "ruleVersion",
+          "latest",
+          "proposal",
+          "unresolvedRequirements",
+          "requirements"
+        ],
+        "properties": {
+          "programId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+          },
+          "trackedAt": {
+            "type": "string"
+          },
+          "trackedBy": {
+            "type": "string"
+          },
+          "retired": {
+            "type": "boolean"
+          },
+          "ruleVersion": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "latest": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "updateId",
+                  "status",
+                  "occurredOn",
+                  "source",
+                  "note",
+                  "nextAction",
+                  "responsibleParty",
+                  "followUpOn",
+                  "revision",
+                  "caseRevision",
+                  "recordedAt",
+                  "recordedBy"
+                ],
+                "properties": {
+                  "updateId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "status": {
+                    "enum": [
+                      "preparing",
+                      "submitted",
+                      "received",
+                      "needs_information",
+                      "approved",
+                      "denied",
+                      "withdrawn"
+                    ]
+                  },
+                  "occurredOn": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(?!0000)[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                  },
+                  "source": {
+                    "enum": [
+                      "self_report",
+                      "program_contact",
+                      "document"
+                    ]
+                  },
+                  "note": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 500
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "nextAction": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 250
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responsibleParty": {
+                    "enum": [
+                      null,
+                      "resident",
+                      "caregiver",
+                      "program",
+                      "clinician",
+                      "contractor",
+                      "other"
+                    ]
+                  },
+                  "followUpOn": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?!0000)[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "revision": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 500
+                  },
+                  "caseRevision": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "recordedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "recordedBy": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "proposal": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eventId",
+                  "title",
+                  "responsiblePerson",
+                  "dueOn"
+                ],
+                "properties": {
+                  "eventId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 250
+                  },
+                  "responsiblePerson": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "dueOn": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?!0000)[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unresolvedRequirements": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 128
+          },
+          "requirements": {
+            "anyOf": [
+              {
+                "type": "array",
+                "maxItems": 64,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "status",
+                    "explanation"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200,
+                      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+                    },
+                    "status": {
+                      "enum": [
+                        "fail",
+                        "unknown"
+                      ]
+                    },
+                    "explanation": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "programId",
+          "findingId",
+          "formId",
+          "title",
+          "kind",
+          "state",
+          "responsiblePerson",
+          "dueOn",
+          "basedOnCaseRevision",
+          "basedOnRuleVersion",
+          "revision",
+          "sourceEventId",
+          "needsReview"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+          },
+          "programId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "findingId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "formId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+          },
+          "kind": {
+            "enum": [
+              "profile",
+              "room_review",
+              "documents",
+              "contact",
+              "draft_review",
+              "follow_up",
+              "other"
+            ]
+          },
+          "state": {
+            "enum": [
+              "pending",
+              "in_progress",
+              "blocked",
+              "completed",
+              "cancelled"
+            ]
+          },
+          "responsiblePerson": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dueOn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date",
+                "pattern": "^(?!0000)[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "basedOnCaseRevision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "basedOnRuleVersion": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "sourceEventId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "needsReview": {
+            "type": "boolean"
+          },
+          "referral": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "providerId"
+            ],
+            "properties": {
+              "providerId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "imported": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "sourceTaskId",
+                  "sourceHash",
+                  "contactNote",
+                  "original"
+                ],
+                "properties": {
+                  "sourceTaskId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "sourceHash": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "contactNote": {
+                    "type": "string",
+                    "maxLength": 500
+                  },
+                  "original": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id",
+                      "providerId",
+                      "title",
+                      "responsible",
+                      "dueDate",
+                      "findingId",
+                      "createdAt",
+                      "completedAt"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      "providerId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      "title": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 160
+                      },
+                      "responsible": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "dueDate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "format": "date"
+                      },
+                      "findingId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 200
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "completedAt": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "nextOffset": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "acknowledgedMutationId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]+$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

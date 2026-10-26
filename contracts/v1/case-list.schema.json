@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/case-list.schema.json",
+  "title": "Private case list page v1",
+  "description": "Minimal owned case metadata, not assessment or identity details. Runtime validation additionally requires unique case IDs in strictly ascending UTF-8 byte order, every ID greater than the request cursor, and at most the requested limit. A nonnull nextAfterCaseId must equal the final row ID and requires a full page. Pagination is not a frozen snapshot; reads can return CASE_NOT_FOUND after concurrent deletion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "cases", "nextAfterCaseId"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "cases": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "caseRevision"],
+        "properties": {
+          "caseId": {"$ref": "#/$defs/caseId"},
+          "caseRevision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991}
+        }
+      }
+    },
+    "nextAfterCaseId": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/caseId"}]}
+  },
+  "if": {"properties": {"cases": {"maxItems": 0}}},
+  "then": {"properties": {"nextAfterCaseId": {"type": "null"}}},
+  "$defs": {
+    "caseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+    }
+  }
+}

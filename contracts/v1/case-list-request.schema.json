@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-at-home.example/contracts/v1/case-list-request.schema.json",
+  "title": "Private case list request v1",
+  "description": "POST /v1/list-cases using the current bearer session. The cursor is an exclusive case-ID ordering boundary, never an owner or access credential; its existence is not checked. Unicode-aware regex matching is required.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "limit", "afterCaseId"],
+  "properties": {
+    "schemaVersion": {"const": "1"},
+    "limit": {"type": "integer", "minimum": 1, "maximum": 20},
+    "afterCaseId": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^(?![\\s\\S]*[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\uD800-\\uDFFF])(?:\\S|\\S[\\s\\S]*\\S)$(?![\\s\\S])"
+    }
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "requests": [
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 1,
+      "expectedSafetyRevision": 0,
+      "mutationId": "fictional-safety-0",
+      "operation": {
+        "type": "add_room",
+        "room": {
+          "id": "fictional-bedroom-one",
+          "type": "bedroom",
+          "name": "Fictional upstairs bedroom"
+        }
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 1,
+      "expectedSafetyRevision": 1,
+      "mutationId": "fictional-safety-1",
+      "operation": {
+        "type": "add_room",
+        "room": {
+          "id": "fictional-bedroom-two",
+          "type": "bedroom",
+          "name": "Fictional downstairs bedroom"
+        }
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 1,
+      "expectedSafetyRevision": 2,
+      "mutationId": "fictional-safety-2",
+      "operation": {
+        "type": "answer",
+        "roomId": "fictional-bedroom-one",
+        "questionId": "bedroom.path",
+        "value": "not_sure"
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 1,
+      "expectedSafetyRevision": 3,
+      "mutationId": "fictional-safety-3",
+      "operation": {
+        "type": "answer",
+        "roomId": "fictional-bedroom-two",
+        "questionId": "bedroom.path",
+        "value": "yes"
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 1,
+      "expectedSafetyRevision": 4,
+      "mutationId": "fictional-safety-4",
+      "operation": {
+        "type": "review_concern",
+        "roomId": "fictional-bedroom-two",
+        "questionId": "bedroom.path",
+        "findingId": "fictional-checklist-finding",
+        "observation": "Fictional resident reports a dark route to the bathroom.",
+        "state": "needs_review"
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 2,
+      "expectedSafetyRevision": 5,
+      "mutationId": "fictional-completion-5",
+      "operation": {
+        "type": "review_concern",
+        "roomId": "fictional-bedroom-two",
+        "questionId": "bedroom.path",
+        "findingId": "fictional-checklist-finding",
+        "observation": "Fictional resident reports a dark route to the bathroom.",
+        "state": "confirmed"
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 3,
+      "expectedSafetyRevision": 6,
+      "mutationId": "fictional-completion-6",
+      "operation": {
+        "type": "annotate_answer",
+        "roomId": "fictional-bedroom-two",
+        "questionId": "bedroom.path",
+        "answerRevision": 1,
+        "note": "Fictional resident note; no repair has been independently verified.",
+        "expectedCatalogRevision": 0,
+        "evidence": []
+      }
+    },
+    {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expectedCaseRevision": 3,
+      "expectedSafetyRevision": 7,
+      "mutationId": "fictional-completion-7",
+      "operation": {
+        "type": "set_addressed",
+        "roomId": "fictional-bedroom-two",
+        "findingId": "fictional-checklist-finding",
+        "findingFingerprint": "7b1ebcb632c0ac7bacad563530e54081ca3bfca6f58a0e531f3959bb47224d2d",
+        "answerRevision": 1,
+        "addressed": true,
+        "evidenceCatalogRevision": 0
+      }
+    }
+  ],
+  "state": {
+    "schemaVersion": "3",
+    "case": {
+      "schemaVersion": "1",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "profile": {
+        "city": "Demo City",
+        "county": null,
+        "healthPlan": "Example Plan",
+        "tenure": null,
+        "ageYears": null,
+        "householdSize": null,
+        "annualIncomeUsd": null,
+        "ownerConsentReported": null
+      },
+      "unresolvedFields": [],
+      "findings": [
+        {
+          "id": "fictional-checklist-finding",
+          "room": "other",
+          "observation": "Fictional resident reports a dark route to the bathroom.",
+          "reviewState": "confirmed",
+          "evidenceIds": [],
+          "measurements": []
+        }
+      ],
+      "revision": 3
+    },
+    "safety": {
+      "schemaVersion": "3",
+      "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "revision": 8,
+      "document": {
+        "catalogVersion": "sah-steadi-home-2017-v1",
+        "rooms": [
+          {
+            "id": "fictional-bedroom-one",
+            "type": "bedroom",
+            "name": "Fictional upstairs bedroom"
+          },
+          {
+            "id": "fictional-bedroom-two",
+            "type": "bedroom",
+            "name": "Fictional downstairs bedroom"
+          }
+        ],
+        "answers": [
+          {
+            "roomId": "fictional-bedroom-one",
+            "questionId": "bedroom.path",
+            "value": "not_sure",
+            "revision": 1
+          },
+          {
+            "roomId": "fictional-bedroom-two",
+            "questionId": "bedroom.path",
+            "value": "yes",
+            "revision": 1
+          }
+        ],
+        "findingRooms": [
+          {
+            "findingId": "fictional-checklist-finding",
+            "roomId": "fictional-bedroom-two",
+            "questionId": "bedroom.path",
+            "answerRevision": 1
+          }
+        ]
+      },
+      "history": [
+        {
+          "mutationId": "fictional-safety-0",
+          "requestHash": "2776800d32da45b136aa00cd210ef501afcdc78ea322058990f398e124d53802",
+          "revision": 1,
+          "caseRevision": 1,
+          "recordedAt": "2026-10-24T18:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "add_room",
+            "room": {
+              "id": "fictional-bedroom-one",
+              "type": "bedroom",
+              "name": "Fictional upstairs bedroom"
+            }
+          }
+        },
+        {
+          "mutationId": "fictional-safety-1",
+          "requestHash": "61219bcc64410f6eeb2192c76493f3720f676f9cf62b9cdabbe24731d305fd79",
+          "revision": 2,
+          "caseRevision": 1,
+          "recordedAt": "2026-10-24T18:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "add_room",
+            "room": {
+              "id": "fictional-bedroom-two",
+              "type": "bedroom",
+              "name": "Fictional downstairs bedroom"
+            }
+          }
+        },
+        {
+          "mutationId": "fictional-safety-2",
+          "requestHash": "304a688e27dbaa555f9308a9b2e8927261e1f7377ebfb74e3eedfc2cb6c6863d",
+          "revision": 3,
+          "caseRevision": 1,
+          "recordedAt": "2026-10-24T18:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "answer",
+            "roomId": "fictional-bedroom-one",
+            "questionId": "bedroom.path",
+            "value": "not_sure"
+          }
+        },
+        {
+          "mutationId": "fictional-safety-3",
+          "requestHash": "181781ace271f46ab6b0bf17b1348b2c262efa3160dd2d1e2b7939b52edef567",
+          "revision": 4,
+          "caseRevision": 1,
+          "recordedAt": "2026-10-24T18:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "answer",
+            "roomId": "fictional-bedroom-two",
+            "questionId": "bedroom.path",
+            "value": "yes"
+          }
+        },
+        {
+          "mutationId": "fictional-safety-4",
+          "requestHash": "bb5717a51fbaea2177ddafdea1198027fc7eae118eb2e3b3260036dd7fd4accc",
+          "revision": 5,
+          "caseRevision": 2,
+          "recordedAt": "2026-10-24T18:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "review_concern",
+            "roomId": "fictional-bedroom-two",
+            "questionId": "bedroom.path",
+            "findingId": "fictional-checklist-finding",
+            "observation": "Fictional resident reports a dark route to the bathroom.",
+            "state": "needs_review"
+          }
+        },
+        {
+          "mutationId": "fictional-completion-5",
+          "requestHash": "a0658618c23f055b545f85f21e01eec80215e2beb554e9d5fd825e3fc5e8a1cd",
+          "revision": 6,
+          "caseRevision": 3,
+          "recordedAt": "2026-10-25T12:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "review_concern",
+            "roomId": "fictional-bedroom-two",
+            "questionId": "bedroom.path",
+            "findingId": "fictional-checklist-finding",
+            "observation": "Fictional resident reports a dark route to the bathroom.",
+            "state": "confirmed"
+          }
+        },
+        {
+          "mutationId": "fictional-completion-6",
+          "requestHash": "efa0abfd113ab33b97b5c7ada1e231fec25046b08bdaba13ac84fc9a1c88c90a",
+          "revision": 7,
+          "caseRevision": 3,
+          "recordedAt": "2026-10-25T12:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "annotate_answer",
+            "roomId": "fictional-bedroom-two",
+            "questionId": "bedroom.path",
+            "answerRevision": 1,
+            "note": "Fictional resident note; no repair has been independently verified.",
+            "expectedCatalogRevision": 0,
+            "evidence": []
+          }
+        },
+        {
+          "mutationId": "fictional-completion-7",
+          "requestHash": "b21c471f26b5d665c38eb039d38b58322ad79e23dd7c449960e324a8714d8a0b",
+          "revision": 8,
+          "caseRevision": 3,
+          "recordedAt": "2026-10-25T12:00:00.000Z",
+          "recordedBy": "fictional-owner",
+          "operation": {
+            "type": "set_addressed",
+            "roomId": "fictional-bedroom-two",
+            "findingId": "fictional-checklist-finding",
+            "findingFingerprint": "7b1ebcb632c0ac7bacad563530e54081ca3bfca6f58a0e531f3959bb47224d2d",
+            "answerRevision": 1,
+            "addressed": true,
+            "evidenceCatalogRevision": 0
+          }
+        }
+      ]
+    },
+    "acknowledgedMutationId": "fictional-completion-7",
+    "evidenceCatalogRevision": 0
+  },
+  "reportRequest": {
+    "schemaVersion": "3",
+    "caseId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "expectedCaseRevision": 3,
+    "expectedSafetyRevision": 8,
+    "expectedCatalogRevision": 0,
+    "includeNotes": false,
+    "includeEvidenceReferences": false
+  }
+}
