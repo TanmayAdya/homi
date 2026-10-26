@@ -1,0 +1,174 @@
+[
+  {
+    "programId": "scfhp-eaa",
+    "questionnaireVersion": "a435cbfede8e433831b80d2808b5aa611eb796553ab596ce20d089530e04c1a5",
+    "questions": [
+      {
+        "key": "activeMembershipReported",
+        "label": "Do you believe your membership is currently active?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "The health plan must verify enrollment and applicable coverage."
+      },
+      {
+        "key": "willingServicesReported",
+        "label": "Are you interested in receiving home adaptation services?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Interest is not a signed consent or authorization."
+      },
+      {
+        "key": "professionalEvaluationReported",
+        "label": "Do you have a professional home or therapy evaluation?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Record whether a document is available. The app does not evaluate medical necessity."
+      },
+      {
+        "key": "professionalOrderReported",
+        "label": "Do you have a professional order for the requested work?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "The responsible professional and health plan determine whether the order is sufficient."
+      },
+      {
+        "key": "otherFundingReported",
+        "label": "Is another source paying for the same requested work?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "The plan reviews overlapping services and other coverage."
+      },
+      {
+        "key": "estimatedCostUsd",
+        "label": "Estimated project cost, if known",
+        "kind": "money",
+        "maxLength": null,
+        "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+      },
+      {
+        "key": "priorEaaPaidUsd",
+        "label": "Prior EAA payments, if known",
+        "kind": "money",
+        "maxLength": null,
+        "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+      }
+    ]
+  },
+  {
+    "programId": "hpsm-eaa",
+    "questionnaireVersion": "4059c929ea12ef5ae544ccbf65df00360c8ee15ffb72ff5d66cbf977f4417e37",
+    "questions": [
+      {
+        "key": "activeMembershipReported",
+        "label": "Do you believe your membership is currently active?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "The health plan must verify enrollment and applicable coverage."
+      },
+      {
+        "key": "willingServicesReported",
+        "label": "Are you interested in receiving home adaptation services?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Interest is not a signed consent or authorization."
+      },
+      {
+        "key": "professionalEvaluationReported",
+        "label": "Do you have a professional home or therapy evaluation?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Record whether a document is available. The app does not evaluate medical necessity."
+      },
+      {
+        "key": "professionalOrderReported",
+        "label": "Do you have a professional order for the requested work?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "The responsible professional and health plan determine whether the order is sufficient."
+      },
+      {
+        "key": "otherFundingReported",
+        "label": "Is another source paying for the same requested work?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "The plan reviews overlapping services and other coverage."
+      },
+      {
+        "key": "estimatedCostUsd",
+        "label": "Estimated project cost, if known",
+        "kind": "money",
+        "maxLength": null,
+        "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+      },
+      {
+        "key": "priorEaaPaidUsd",
+        "label": "Prior EAA payments, if known",
+        "kind": "money",
+        "maxLength": null,
+        "description": "US dollars, up to two decimal places. Unknown is different from zero. A reported amount does not establish funding eligibility."
+      },
+      {
+        "key": "careManagerEngagedReported",
+        "label": "Are you working with a care manager?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "HPSM must confirm its current care-management and referral requirements."
+      }
+    ]
+  },
+  {
+    "programId": "rtp-home-repair",
+    "questionnaireVersion": "b65e4a71378a4eff16968fe695a90dbb4eb2e5f4396e35c4889a253f25f62f72",
+    "questions": [
+      {
+        "key": "ownerOccupiedReported",
+        "label": "Do you own and live in the home?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "RTP must verify ownership, residence and its current service area."
+      },
+      {
+        "key": "otherPropertyReported",
+        "label": "Do you own other real estate?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "RTP must confirm whether and how this affects the currently accepted application."
+      },
+      {
+        "key": "intendRemainTwoYearsReported",
+        "label": "Do you intend to remain in this home for at least two years?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "This prepares a discussion with RTP; the app has not verified the current annual eligibility rules."
+      },
+      {
+        "key": "incomeDocumentsReady",
+        "label": "Are household income documents ready?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Follow RTP instructions for adults in the household. Do not upload bank statements or tax records to this app."
+      },
+      {
+        "key": "ownershipDocumentsReady",
+        "label": "Is proof of ownership ready?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Submit supporting documents through RTP’s official intake process."
+      },
+      {
+        "key": "residenceDocumentsReady",
+        "label": "Is proof of residence ready?",
+        "kind": "boolean",
+        "maxLength": null,
+        "description": "Follow official instructions and obscure unnecessary account or Social Security numbers."
+      },
+      {
+        "key": "repairRequest",
+        "label": "What repairs would you like RTP to consider?",
+        "kind": "text",
+        "maxLength": 600,
+        "description": "Describe observed issues and requested help. Avoid account numbers, diagnoses or unsupported structural claims."
+      }
+    ]
+  }
+]

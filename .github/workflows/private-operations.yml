@@ -1,0 +1,123 @@
+name: Private team beta operations
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        type: choice
+        default: backup
+        options: [maintenance, backup]
+  schedule:
+    - cron: '17 * * * *'
+    - cron: '37 3 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: private-team-operations-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  maintenance:
+    if: >-
+      vars.SAFEATHOME_ENABLE_PRIVATE_OPERATIONS == 'true' &&
+      vars.SAFEATHOME_ACTIONS_BUDGET_ACK == 'included-only' &&
+      github.event.repository.private == true &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+      ((github.event_name == 'schedule' && vars.SAFEATHOME_ENABLE_PRIVATE_SCHEDULES == 'true' && github.event.schedule == '17 * * * *') ||
+      (github.event_name == 'workflow_dispatch' && inputs.task == 'maintenance'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions:
+      contents: read
+      actions: read
+    defaults:
+      run:
+        shell: bash
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24.22.0
+      - run: npm ci
+        id: dependencies
+      - name: Complete at most one confirmed closure and check aggregates
+        env:
+          SAFEATHOME_MIGRATION_DATABASE_URL: ${{ secrets.SAFEATHOME_OPERATOR_SESSION_DATABASE_URL }}
+          SAFEATHOME_SUPABASE_URL: ${{ vars.SAFEATHOME_SUPABASE_URL }}
+          SAFEATHOME_SUPABASE_SECRET_KEY: ${{ secrets.SAFEATHOME_SUPABASE_SECRET_KEY }}
+          SAFEATHOME_DATABASE_CA_PEM: ${{ vars.SAFEATHOME_DATABASE_CA_PEM }}
+        run: node tool/private-operations.ts
+      - name: Check successful recovery-copy freshness and expiry
+        if: ${{ always() && steps.dependencies.outcome == 'success' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tool/backup-retention.ts health
+
+  backup:
+    if: >-
+      vars.SAFEATHOME_ENABLE_PRIVATE_OPERATIONS == 'true' &&
+      vars.SAFEATHOME_ACTIONS_BUDGET_ACK == 'included-only' &&
+      github.event.repository.private == true &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+      ((github.event_name == 'schedule' && vars.SAFEATHOME_ENABLE_PRIVATE_SCHEDULES == 'true' && github.event.schedule == '37 3 * * *') ||
+      (github.event_name == 'workflow_dispatch' && inputs.task == 'backup'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+    defaults:
+      run:
+        shell: bash
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24.22.0
+      - run: npm ci
+      - name: Refuse a fifth copy if earlier pruning needs operator attention
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tool/backup-retention.ts preflight
+      - name: Create owner-only output directory
+        run: mkdir -m 700 "$RUNNER_TEMP/safeathome-backup-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Capture consistent database and encrypt with public recipient key
+        env:
+          SAFEATHOME_MIGRATION_DATABASE_URL: ${{ secrets.SAFEATHOME_OPERATOR_SESSION_DATABASE_URL }}
+          SAFEATHOME_SUPABASE_URL: ${{ vars.SAFEATHOME_SUPABASE_URL }}
+          SAFEATHOME_DATABASE_CA_PEM: ${{ vars.SAFEATHOME_DATABASE_CA_PEM }}
+          SAFEATHOME_BACKUP_PUBLIC_KEY: ${{ vars.SAFEATHOME_BACKUP_PUBLIC_KEY }}
+          SAFEATHOME_BACKUP_RECIPIENT_SHA256: ${{ vars.SAFEATHOME_BACKUP_RECIPIENT_SHA256 }}
+          SAFEATHOME_BACKUP_ARCHIVE: ${{ runner.temp }}/safeathome-backup-${{ github.run_id }}-${{ github.run_attempt }}/copy.sah-backup
+        run: node tool/backup-public.ts scheduled
+      - name: Upload encrypted bytes only
+        id: encrypted-copy
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: safeathome-encrypted-backup-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/safeathome-backup-${{ github.run_id }}-${{ github.run_attempt }}/copy.sah-backup
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 90
+          overwrite: false
+      - name: Keep latest three successful encrypted copies after upload succeeds
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SAFEATHOME_BACKUP_ARTIFACT_ID: ${{ steps.encrypted-copy.outputs.artifact-id }}
+        run: node tool/backup-retention.ts
+      - name: Remove the local encrypted copy even if upload or pruning fails
+        if: ${{ always() }}
+        run: |
+          archive_dir="$RUNNER_TEMP/safeathome-backup-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          if [[ -d "$archive_dir" ]]; then
+            rm -f -- "$archive_dir/copy.sah-backup"
+            rmdir -- "$archive_dir"
+          fi
