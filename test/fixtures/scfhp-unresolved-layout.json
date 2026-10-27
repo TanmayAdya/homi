@@ -1,0 +1,105 @@
+{
+  "purpose": "Layout-only snapshot of existing backend/src/packets.ts and programs/scfhp-eaa.ts output for an empty fictional case. Not a policy-verification fixture.",
+  "missingItems": [
+    {
+      "id": "official-form",
+      "description": "Confirm the current official application form and its version with the program.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "field-mapping",
+      "description": "Confirm which information belongs in each field before preparing the official form.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "intake-route",
+      "description": "Verify the current intake route and submission instructions with the program.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "program-availability",
+      "description": "Confirm whether the program is currently accepting requests.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "required-document:0",
+      "description": "Confirm whether this document is required and who should supply it: Professional order and individualized equipment/service justification; confirm the appropriate author and supporting equipment information.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "required-document:1",
+      "description": "Confirm whether this document is required and who should supply it: Relevant discharge and support-agency records, if available and applicable; their absence does not establish refusal or ineligibility.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "required-document:2",
+      "description": "Confirm whether this document is required and who should supply it: Home suitability documentation and PT/OT evaluation when required; the plan determines whether an evaluation exception applies.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "required-document:3",
+      "description": "Confirm whether this document is required and who should supply it: Itemized estimates in the form’s four cost categories, with two provider bids where possible; confirm scope and any cost exception with the plan.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "required-document:4",
+      "description": "Confirm whether this document is required and who should supply it: Owner permission and property acknowledgements for applicable installed work; obtain actual documents rather than inferring them from reported permission.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "required-document:5",
+      "description": "Confirm whether this document is required and who should supply it: Actual member/representative consent and the referring person’s reviewed attestation and signature; the app does not supply these.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:enrollment",
+      "description": "Confirm the unresolved requirement: Plan product, active enrollment and service area: current program rules need verification before this check can be used. Manual review (program): SCFHP publishes this route for Medi-Cal and DualConnect members, and DHCS lists EAA for SCFHP in Santa Clara County. Ask the plan to verify this person’s product, active enrollment and applicable service area; a typed plan name or county does not establish them.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:clinical-need",
+      "description": "Confirm the unresolved requirement: Clinical need and institutionalization risk: current program rules need verification before this check can be used. Manual review (professional): A qualified professional must document the clinical need and relevant care setting. Home observations do not establish these determinations.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:service-scope",
+      "description": "Confirm the unresolved requirement: Requested adaptation and permitted scope: current program rules need verification before this check can be used. Manual review (program): Have the plan review the requested adaptation, its medical or remedial purpose and any applicable scope exception. An observed hazard alone does not establish a covered service.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:alternative-coverage",
+      "description": "Confirm the unresolved requirement: Other coverage and duplicate services: current program rules need verification before this check can be used. Manual review (program): Ask the plan whether an available Medi-Cal or Medicare benefit can achieve the same goals, and whether other funded services would duplicate this request. Do not assume an alternative is available or sufficient.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:assessment",
+      "description": "Confirm the unresolved requirement: Assessment and supporting evaluation: current program rules need verification before this check can be used. Manual review (professional): Coordinate the required professional order and individualized justification, home suitability review and any applicable PT/OT evaluation. The plan must confirm whether approval without a therapy evaluation applies; missing paperwork alone does not establish ineligibility.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:property-permission",
+      "description": "Confirm the unresolved requirement: Property acknowledgements: current program rules need verification before this check can be used. Manual review (resident): With the plan’s guidance, obtain the owner’s written permission and applicable property acknowledgements for installed work in a home the member does not own. Reported permission is not signed documentation; missing paperwork does not establish refusal.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:cost-and-prior-use",
+      "description": "Confirm the unresolved requirement: Cost limit and applicable exceptions: current program rules need verification before this check can be used. Manual review (program): The DHCS and SCFHP guides state a $7,500 lifetime limit with exceptions; the referral form says per authorization. Ask the plan to confirm the applicable limit and exception interpretation. Do not infer a renewed allowance or reject an unresolved exception.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:prior-use",
+      "description": "Confirm the unresolved requirement: Prior EAA use and remaining funding: current program rules need verification before this check can be used. Manual review (program): Ask the plan to verify prior EAA payments and the funding history relevant to this request. Missing history is not zero prior use, and the app cannot calculate a remaining allowance from the current profile.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:consent",
+      "description": "Confirm the unresolved requirement: Consent to services and data sharing: current program rules need verification before this check can be used. Manual review (resident): Obtain the member’s actual consent through the appropriate process. No answer is inferred from use of this app or reported owner permission.",
+      "resolvedBy": "program"
+    },
+    {
+      "id": "check:policy-currentness",
+      "description": "Confirm the unresolved requirement: Applicable policy and current intake: current program rules need verification before this check can be used. Manual review (program): Confirm the governing policy, accepted form and current intake with the plan. DHCS still labels the July 2026 Volume 1 changes proposed; this review does not establish adoption, a complete effective period or open capacity.",
+      "resolvedBy": "program"
+    }
+  ]
+}
