@@ -1,0 +1,20 @@
+name: homi_local_llm
+description: Opt-in, pinned local llama.cpp trial with explicit model import.
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ^3.11.3
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: org.safeathome.homi_local_llm
+        pluginClass: HomiLocalLlmPlugin
+      ios:
+        pluginClass: HomiLocalLlmPlugin

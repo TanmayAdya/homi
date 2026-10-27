@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.22)
+project(homi_local_llm_android LANGUAGES C CXX)
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../../../../native" shared-native)
+target_sources(homi_llm PRIVATE homi_llm_jni.cpp)
+target_link_libraries(homi_llm PRIVATE android log)
